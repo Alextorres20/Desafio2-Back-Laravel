@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePruebasTable extends Migration
+class CreatePruebaOraculoValoracionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreatePruebasTable extends Migration
      */
     public function up()
     {
-        Schema::create('pruebas', function (Blueprint $table) {
+        Schema::create('prueba_oraculo_valoracion', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_dios');
-            $table->foreign('id_dios')->references('id')->on('dios')->onDelete('cascade');
-            $table->integer('cantidad_destino');
+            $table->unsignedBigInteger('id_prueba_oraculo');
+            $table->foreign('id_prueba_oraculo')->references('id')->on('pruebas_oraculo')->onDelete('cascade');
+            $table->string('caracteristica_asociada');
+
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreatePruebasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pruebas');
+        Schema::dropIfExists('prueba_valoracion');
     }
 }

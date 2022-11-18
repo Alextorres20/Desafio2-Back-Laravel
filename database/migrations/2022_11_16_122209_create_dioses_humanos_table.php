@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePruebasTable extends Migration
+class CreateDiosesHumanosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreatePruebasTable extends Migration
      */
     public function up()
     {
-        Schema::create('pruebas', function (Blueprint $table) {
-            $table->id();
+        Schema::create('dioses_humanos', function (Blueprint $table) {
+            $table->primary(['id_dios', 'id_humano']);
             $table->unsignedBigInteger('id_dios');
             $table->foreign('id_dios')->references('id')->on('dios')->onDelete('cascade');
-            $table->integer('cantidad_destino');
+            $table->unsignedBigInteger('id_humano');
+            $table->foreign('id_humano')->references('id')->on('humanos')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreatePruebasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pruebas');
+        Schema::dropIfExists('dios_humano');
     }
 }

@@ -3,9 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Dios;
-use App\Models\Humano;
-class DiosHumanoFactory extends Factory
+use App\Models\PruebaOraculo;
+class PruebaOraculoValoracionFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,8 +15,8 @@ class DiosHumanoFactory extends Factory
     {
         return [
             //
-            'id_dios' => $this->faker->randomElement(Dios::get('id')),
-            'id_humano' => $this->faker->randomElement(Humano::get('id'))
+            'id_prueba_oraculo' => $this->faker->randomElement(PruebaOraculo::get('id')),
+            'caracteristica_asociada' => rand(1,5)
         ];
     }
 }

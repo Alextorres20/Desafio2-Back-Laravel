@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDiosHumanoTable extends Migration
+class CreatePruebasHumanosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateDiosHumanoTable extends Migration
      */
     public function up()
     {
-        Schema::create('dios_humano', function (Blueprint $table) {
-            $table->primary(['id_dios', 'id_humano']);
-            $table->unsignedBigInteger('id_dios');
-            $table->foreign('id_dios')->references('id')->on('users')->onDelete('cascade');
+        Schema::create('pruebas_humanos', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('id_prueba');
+            $table->foreign('id_prueba')->references('id')->on('pruebas')->onDelete('cascade');
             $table->unsignedBigInteger('id_humano');
             $table->foreign('id_humano')->references('id')->on('humanos')->onDelete('cascade');
             $table->timestamps();
@@ -30,6 +30,6 @@ class CreateDiosHumanoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dios_humano');
+        Schema::dropIfExists('prueba_humano');
     }
 }
