@@ -3,9 +3,9 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Dios;
+use App\Models\Prueba;
 use App\Models\Humano;
-class DiosHumanoFactory extends Factory
+class PruebaHumanoFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,8 +16,9 @@ class DiosHumanoFactory extends Factory
     {
         return [
             //
-            'id_dios' => $this->faker->randomElement(Dios::get('id')),
+            'id_prueba' => $this->faker->randomElement(Prueba::get('id')),
             'id_humano' => $this->faker->randomElement(Humano::get('id'))
+
         ];
     }
 }

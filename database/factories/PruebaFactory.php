@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use App\Models\Dios;
 class PruebaFactory extends Factory
 {
     /**
@@ -15,6 +15,7 @@ class PruebaFactory extends Factory
     {
         return [
             //
+            'id_dios' => $this->faker->randomElement(Dios::get('id')),
             'cantidad_destino' => rand(0,100)
         ];
     }
