@@ -10,5 +10,6 @@ class PruebaOraculo extends Model
     use HasFactory;
 
     protected $table = 'pruebas_oraculo';
+    public $incrementing = false;
 
 }

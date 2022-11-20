@@ -8,5 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PruebaOraculoLibre extends Model
 {
     use HasFactory;
-    protected $table = 'prueba_oraculo_libre';
+
+    protected $table = 'pruebas_oraculo_libre';
+    public $incrementing = false;
 }

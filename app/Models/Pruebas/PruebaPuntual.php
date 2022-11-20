@@ -5,8 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PruebaOraculoValoracion extends Model
+class PruebaPuntual extends Model
 {
     use HasFactory;
-    protected $table = 'prueba_oraculo_valoracion';
+
+    protected $table = 'pruebas_puntuales';
+    public $incrementing = false;
 }

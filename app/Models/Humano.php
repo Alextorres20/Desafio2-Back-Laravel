@@ -9,6 +9,6 @@ class Humano extends Model
 {
     use HasFactory;
 
-    public $incrementing = false; //Para indicarle que la clave no es autoincremental.
+    public $incrementing = false;
 
 }
