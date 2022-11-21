@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RegistroController;
+use App\Http\Controllers\CaracteristicasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,15 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::controller(RegistroController::class)->group(function (){
+    Route::post('registrar', 'registrar');
+    Route::get('verificar/{id}', 'verificar');
+
+    Route::post('iniciarSesion','iniciarSesion');
+    Route::post('cerrarSesion','cerrarSesion');
+});
+
+// Route::controller(CaracteristicasController::class)->group(function (){
+//     Route::post('asignarCaracteristicas/{id}', 'asignarCaracteristicas');
+// });

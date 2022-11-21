@@ -18,7 +18,7 @@ class CreatePruebasHumanosTable extends Migration
             $table->unsignedBigInteger('id_prueba');
             $table->foreign('id_prueba')->references('id')->on('pruebas')->onDelete('cascade');
             $table->unsignedBigInteger('id_humano');
-            $table->foreign('id_humano')->references('id')->on('humanos')->onDelete('cascade');
+            $table->foreign('id_humano')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
