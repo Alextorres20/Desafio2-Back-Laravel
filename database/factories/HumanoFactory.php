@@ -14,7 +14,7 @@ class HumanoFactory extends Factory
     public function definition()
     {
         return [
-            'id' => $this->faker->randomElement(User::get('id')),
+            'id_usuario' => $this->faker->randomElement(User::get('id')),
             'destino' => rand(0,100),
             'donde_murio' => $this->faker->randomElement(['Campos Eliseos', 'Tartaro', null])
         ];
