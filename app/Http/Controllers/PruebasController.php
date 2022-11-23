@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use App\Http\Resources\PruebasResource;
+use App\Http\Resources\PruebaResource;
+use App\Http\Resources\PruebaPuntualResource;
 use App\Models\Caracteristica;
 use App\Models\Pruebas\Prueba;
 use App\Models\Pruebas\PruebaPuntual;
@@ -50,7 +51,7 @@ class PruebasController extends Controller
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ];
-        return new PruebasResource(Prueba::create($datos));
+        return Prueba::create($datos);
     }
 
 
@@ -61,7 +62,8 @@ class PruebasController extends Controller
             'id_caracteristica' => Caracteristica::where('nombre', $request->atributo)->value('id'),
             'dificultad' => $request->dificultad
         ];
-        return new PruebasResource(PruebaPuntual::create($datos));
+
+        return new PruebaPuntualResource(PruebaPuntual::create($datos));
     }
 
 

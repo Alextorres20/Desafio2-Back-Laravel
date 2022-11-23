@@ -4,8 +4,9 @@ namespace App\Models\Pruebas;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Pruebas\Prueba;
 
-class PruebaPuntual extends Model
+class PruebaPuntual extends Prueba
 {
     use HasFactory;
 
@@ -20,4 +21,9 @@ class PruebaPuntual extends Model
         'id_caracteristica',
         'dificultad'
     ];
+
+    public function prueba()
+    {
+        return $this->hasOne(Prueba::class, 'id', 'id');
+    }
 }

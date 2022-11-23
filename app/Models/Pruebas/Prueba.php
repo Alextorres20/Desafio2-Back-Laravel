@@ -13,4 +13,6 @@ class Prueba extends Model
         'id_dios',
         'cantidad_destino'
     ];
+
+
 }
