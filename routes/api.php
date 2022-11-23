@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PruebasController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,5 +30,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 /* -------------- Pruebas -------------- */
-Route::resource('pruebas', pruebasController::class);
+Route::resource('pruebas', PruebasController::class);
 
