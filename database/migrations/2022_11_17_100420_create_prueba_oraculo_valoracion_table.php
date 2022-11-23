@@ -18,8 +18,7 @@ class CreatePruebaOraculoValoracionTable extends Migration
             $table->unsignedBigInteger('id_prueba_oraculo');
             $table->foreign('id_prueba_oraculo')->references('id')->on('pruebas_oraculo')->onDelete('cascade');
             $table->string('caracteristica_asociada');
-
-            $table->timestamps();
+            $table->integer('valor');
         });
     }
 

@@ -21,7 +21,6 @@ class CreatePruebaPuntualTable extends Migration
             $table->unsignedBigInteger('id_caracteristica');
             $table->foreign('id_caracteristica')->references('id')->on('caracteristicas')->onDelete('cascade');
             $table->integer('dificultad');
-            $table->timestamps();
         });
     }
 

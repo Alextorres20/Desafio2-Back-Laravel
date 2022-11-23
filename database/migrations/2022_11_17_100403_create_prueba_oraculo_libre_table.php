@@ -19,8 +19,6 @@ class CreatePruebaOraculoLibreTable extends Migration
             $table->foreign('id_prueba_oraculo')->references('id')->on('pruebas_oraculo')->onDelete('cascade');
             $table->string('palabras_asociadas');
             $table->integer('porcentaje');
-
-            $table->timestamps();
         });
     }
 

@@ -26,7 +26,17 @@ class RegistroController extends Controller
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             $auth = Auth::user();
             //$success['token'] =  $auth->createToken('access_token',["delete","read"])->plainTextToken;
-            $success['token'] =  $auth->createToken('access_token',["read"])->plainTextToken;
+            if(str_contains($auth->email, 'zeus') || str_contains($auth->email, 'poseidon') || str_contains($auth->email, 'hades')){
+                if(str_contains($auth->name, 'hades')){
+                    $success['token'] =  $auth->createToken('access_token',["dios", "hades"])->plainTextToken;
+                }
+                else{
+                    $success['token'] =  $auth->createToken('access_token',["dios"])->plainTextToken;
+                }
+            }
+            else{
+                $success['token'] =  $auth->createToken('access_token',["humano"])->plainTextToken;
+            }
             $success['name'] =  $auth->name;
             return response()->json(["success"=>true,"data"=>$success, "message" => "Logged in!"],200);
         }
@@ -54,7 +64,7 @@ class RegistroController extends Controller
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);  //También vale: Hash::make($request->password)
         $user = User::create($input);
-        $success['token']  = $user->createToken('registrado', ["read","create"])->plainTextToken;
+        $success['token']  = $user->createToken('registrado', ["humano"])->plainTextToken;
         $success['name'] =  $user->name;
         $email = $user->email;
 
