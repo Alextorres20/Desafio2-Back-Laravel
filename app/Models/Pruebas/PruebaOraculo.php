@@ -11,5 +11,5 @@ class PruebaOraculo extends Model
 
     protected $table = 'pruebas_oraculo';
     public $incrementing = false;
-
+    public $timestamps = false;
 }

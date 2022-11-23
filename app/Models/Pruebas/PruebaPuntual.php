@@ -11,4 +11,5 @@ class PruebaPuntual extends Model
 
     protected $table = 'pruebas_puntuales';
     public $incrementing = false;
+    public $timestamps = false;
 }

@@ -19,8 +19,6 @@ class CreatePruebaOraculoTable extends Migration
             $table->string('tipo');
             $table->string('pregunta');
             $table->string('respuesta');
-
-            $table->timestamps();
         });
     }
 

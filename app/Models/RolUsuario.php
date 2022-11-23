@@ -13,6 +13,4 @@ class RolUsuario extends Model
     protected $primaryKey = ['id_usuario', 'id_rol'];
     public $incrementing = false;
     public $timestamps = false;
-
-
 }
