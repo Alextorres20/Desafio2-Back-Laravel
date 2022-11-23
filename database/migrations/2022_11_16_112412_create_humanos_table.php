@@ -14,7 +14,9 @@ class CreateHumanosTable extends Migration
     public function up()
     {
         Schema::create('humanos', function (Blueprint $table) {
-            $table->id();
+            $table->primary('id_usuario');
+            $table->unsignedBigInteger('id_usuario');
+            $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade');
             $table->integer('destino');
             $table->string('donde_murio')->nullable();
             $table->timestamps();

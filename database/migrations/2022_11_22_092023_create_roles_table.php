@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDiosTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateDiosTable extends Migration
      */
     public function up()
     {
-        Schema::create('dios', function (Blueprint $table) {
-            $table->id();
-            $table->string('nombre');
+        Schema::create('roles', function (Blueprint $table) {
+            $table->primary('id_usuario');
+            $table->unsignedBigInteger('id_usuario');
+            $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade');
+            $table->string('rol');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateDiosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dios');
+        Schema::dropIfExists('roles');
     }
 }

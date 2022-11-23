@@ -3,8 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Dios;
-use App\Models\Humano;
+use App\Models\User;
 class DiosHumanoFactory extends Factory
 {
     /**
@@ -16,8 +15,8 @@ class DiosHumanoFactory extends Factory
     {
         return [
             //
-            'id_dios' => $this->faker->randomElement(Dios::get('id')),
-            'id_humano' => $this->faker->randomElement(Humano::get('id'))
+            'id_dios' => $this->faker->randomElement(User::get('id')),
+            'id_humano' => $this->faker->randomElement(User::get('id'))
         ];
     }
 }

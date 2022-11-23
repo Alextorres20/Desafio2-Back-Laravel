@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Prueba;
-use App\Models\Humano;
+use App\Models\User;
 class PruebaHumanoFactory extends Factory
 {
     /**
@@ -17,7 +17,7 @@ class PruebaHumanoFactory extends Factory
         return [
             //
             'id_prueba' => $this->faker->randomElement(Prueba::get('id')),
-            'id_humano' => $this->faker->randomElement(Humano::get('id'))
+            'id_humano' => $this->faker->randomElement(User::get('id'))
 
         ];
     }
