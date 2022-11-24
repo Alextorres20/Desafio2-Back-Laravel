@@ -3,8 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\CaracteristicasController;
+use App\Models\Caracteristica;
 use App\Models\CaracteristicaUsuario;
 use App\Models\DiosHumano;
+use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
+use Faker;
+
 class DiosController extends Controller
 {
     //
@@ -174,5 +182,35 @@ class DiosController extends Controller
 
         return $dioshumano;
 
+    }
+
+    public function crearUsuarios(Request $req){
+        $auth = Auth::user();
+        $faker = Faker\Factory::create();
+        $cantidad = $req->get('cantidad');
+        $usuarios_creados = [];
+        for($i = 1; $i <= $cantidad; $i++){
+            $usuario = new User;
+            $usuario->name = $faker->name();
+            $usuario->password = bcrypt('1234');
+            $usuario->email = $faker->unique()->safeEmail();
+            $usuario->email_verified_at = Carbon::now()->toDateTimeString();
+            $usuario->remember_token = Str::random(10);
+            $usuario->save();
+            $caracteristicas_user = [];
+            for ($u=1; $u <= 5 ; $u++) {
+                $id_Caracteristica = Caracteristica::where('id', $u)->first()->id;
+                array_push($caracteristicas_user, CaracteristicasController::asignarCaracteristicas($usuario->id, $id_Caracteristica));
+            }
+            $dios_humano = new DiosHumano;
+            $dios_humano->id_dios =  $auth->id;
+            $dios_humano->id_humano = $usuario->id;
+            $dios_humano->save();
+            array_push($usuarios_creados, $usuario);
+        }
+        return response()->json(['Dios' => $auth->name,
+        'Cantidad de usuarios ' => $cantidad,
+        'Usuarios' => $usuarios_creados,
+        'DiosHumano' => $dios_humano],201);
     }
 }

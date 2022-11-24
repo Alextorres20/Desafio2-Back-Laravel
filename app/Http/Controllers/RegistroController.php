@@ -27,7 +27,7 @@ class RegistroController extends Controller
             $auth = Auth::user();
             //$success['token'] =  $auth->createToken('access_token',["delete","read"])->plainTextToken;
             if(str_contains($auth->email, 'zeus') || str_contains($auth->email, 'poseidon') || str_contains($auth->email, 'hades')){
-                if(str_contains($auth->name, 'hades')){
+                if(str_contains($auth->name, 'Hades')){
                     $success['token'] =  $auth->createToken('access_token',["dios", "hades"])->plainTextToken;
                 }
                 else{
