@@ -31,6 +31,7 @@ class PruebasController extends Controller
                 case 'puntual':
                     $validator = Validar::validarPruebaPuntual($request->all());
                     if ($validator->fails()) {
+                        Prueba::destroy($pruebaGeneral->id);
                         return response()->json(['estado' => 'error', $validator->errors()], 400);
                     } else {
                         $prueba = self::insertarPuntual($request, $pruebaGeneral);
