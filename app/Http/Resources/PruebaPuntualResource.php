@@ -21,7 +21,8 @@ class PruebaPuntualResource extends JsonResource
             'cantidad_destino' => $this->prueba->cantidad_destino,
             'descripcion' => $this->descripcion,
             'atributo' => Caracteristica::where('id', $this->id_caracteristica)->value('nombre'),
-            'dificultad' => $this->dificultad
+            'dificultad' => $this->dificultad,
+            'fecha_creacion' => $this->prueba->created_at->format('d-m-Y')
         ];
     }
 }
