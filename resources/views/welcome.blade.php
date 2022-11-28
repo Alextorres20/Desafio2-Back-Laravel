@@ -21,7 +21,15 @@
         </style>
     </head>
     <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+        <?php
+            echo '<h1>Bienvenido '. $nombre . '</h1>';
+        ?>
+        <p>Eres digno para superar las pruebas de los Dioses Griegos,
+            Pincha en este enlace para mostrar tu valentia</p>
+        <?php
+            echo '<p>Pincha aqui "MORTAL": <a href=http://127.0.0.1:8000/api/verificar/'.$id . '>"Enfrenta a tu Destino"</a></p>'
+        ?>
+        {{-- <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
@@ -127,6 +135,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </body>
 </html>

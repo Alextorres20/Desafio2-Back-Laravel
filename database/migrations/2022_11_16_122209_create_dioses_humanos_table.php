@@ -18,7 +18,7 @@ class CreateDiosesHumanosTable extends Migration
             $table->unsignedBigInteger('id_dios');
             $table->foreign('id_dios')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('id_humano');
-            $table->foreign('id_humano')->references('id')->on('humanos')->onDelete('cascade');
+            $table->foreign('id_humano')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
