@@ -3,11 +3,9 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Models\Caracteristica;
 use App\Models\User;
 
-
-class PruebaPuntualResource extends JsonResource
+class PruebaRespuestaLibreResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -22,9 +20,10 @@ class PruebaPuntualResource extends JsonResource
             'id_dios' => $this->prueba->id_dios,
             'nombre_dios' => User::where('id', $this->prueba->id_dios)->value('name'),
             'cantidad_destino' => $this->prueba->cantidad_destino,
-            'pregunta_descripcion' => $this->descripcion,
-            'atributo' => Caracteristica::where('id', $this->id_caracteristica)->value('nombre'),
-            'dificultad' => $this->dificultad,
+            'tipo' => $this->oraculo->tipo,
+            'pregunta_descripcion' => $this->oraculo->pregunta,
+            'porcentaje' => $this->porcentaje,
+            'palabras_clave' => $this->palabras_clave,
             'fecha_creacion' => $this->prueba->created_at->format('d-m-Y')
         ];
     }

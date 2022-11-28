@@ -11,11 +11,11 @@ class Validar extends Model
         $messages = [
             'digits_between' => 'Debe ser un número entre 1 y 100',
             'required' => 'Campo requerido',
-            'in' => 'El campo tipo debe estar entre las siguientes opciones: puntual, libre, eleccion y valoracion'
+            'in' => 'El campo tipo debe estar entre las siguientes opciones: puntual, respuesta-libre, eleccion y valoracion'
         ];
 
         return Validator::make($input, [
-            'tipo' => 'required | in:puntual,libre,valoracion,eleccion',
+            'tipo' => 'required | in:puntual,respuesta-libre,valoracion,eleccion',
             'destino' => 'required | digits_between:1,100'
         ], $messages);
     }
@@ -36,9 +36,24 @@ class Validar extends Model
             'dificultad' => 'required | digits_between:1,100'
         ], $messages);
     }
-/*
 
-    static function validarPruebaLibre($input) {
+
+    static function validarPruebaRespuestaLibre($input) {
+        $messages = [
+            'digits_between' => 'Debe ser un número entre 1 y 100',
+            'required' => 'Campo requerido',
+            'max' => 'No puede superar los :max caracteres',
+        ];
+
+        return Validator::make($input, [
+            'pregunta' => 'required | max:255',
+            'palabras_clave' => 'required | max:255',
+            'porcentaje' => 'required | digits_between:1,100'
+        ], $messages);
+    }
+
+
+/*    static function validarPruebaLibre($input) {
         $messages = [
             'digits_between' => 'Debe ser un número entre 1 y 100',
             'required' => 'Campo requerido',

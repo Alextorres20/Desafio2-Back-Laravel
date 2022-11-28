@@ -18,7 +18,6 @@ class CreatePruebaOraculoTable extends Migration
             $table->foreign('id')->references('id')->on('pruebas')->onDelete('cascade');
             $table->string('tipo');
             $table->string('pregunta');
-            $table->string('respuesta');
         });
     }
 

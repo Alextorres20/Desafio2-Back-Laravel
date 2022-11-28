@@ -30,5 +30,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 /* -------------- Pruebas -------------- */
-Route::resource('pruebas', PruebasController::class)/* ->middleware('auth:sanctum') */; // Falta comprobar DIOS
+Route::resource('pruebas', PruebasController::class)->middleware('auth:sanctum', 'midCrearPruebas');
 
