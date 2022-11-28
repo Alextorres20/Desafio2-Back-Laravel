@@ -16,7 +16,7 @@ class CreateDiosesHumanosTable extends Migration
         Schema::create('dioses_humanos', function (Blueprint $table) {
             $table->primary(['id_dios', 'id_humano']);
             $table->unsignedBigInteger('id_dios');
-            $table->foreign('id_dios')->references('id')->on('dios')->onDelete('cascade');
+            $table->foreign('id_dios')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('id_humano');
             $table->foreign('id_humano')->references('id')->on('humanos')->onDelete('cascade');
             $table->timestamps();
