@@ -8,6 +8,8 @@ use App\Http\Controllers\CaracteristicasController;
 use App\Models\Caracteristica;
 use App\Models\CaracteristicaUsuario;
 use App\Models\DiosHumano;
+use App\Models\Rol;
+use App\Models\RolUsuario;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
@@ -207,6 +209,11 @@ class DiosController extends Controller
             $dios_humano->id_humano = $usuario->id;
             $dios_humano->save();
             array_push($usuarios_creados, $usuario);
+
+            $rolUsuario = new RolUsuario;
+            $rolUsuario->id_usuario = $usuario->id;
+            $rolUsuario->id_rol = Rol::where('Nombre', 'Humano')->first()->id;
+            $rolUsuario->save();
         }
         return response()->json(['Dios' => $auth->name,
         'Cantidad de usuarios ' => $cantidad,
