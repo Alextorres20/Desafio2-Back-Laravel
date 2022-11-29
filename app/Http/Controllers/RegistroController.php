@@ -11,6 +11,8 @@ use App\Models\Humano;
 use App\Models\DiosHumano;
 use App\Models\Caracteristica;
 use App\Models\CaracteristicaUsuario;
+use App\Models\Rol;
+use App\Models\RolUsuario;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Validator;
@@ -24,18 +26,25 @@ class RegistroController extends Controller
     public function iniciarSesion(Request $request)
     {
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+            $rolHades = Rol::where('Nombre', 'Hades')->first();
+            $rolDios = Rol::where('Nombre', 'Dios')->first();
+            $rolHumano = Rol::where('Nombre', 'Humano')->first();
             $auth = Auth::user();
-            //$success['token'] =  $auth->createToken('access_token',["delete","read"])->plainTextToken;
             if(str_contains($auth->email, 'zeus') || str_contains($auth->email, 'poseidon') || str_contains($auth->email, 'hades')){
                 if(str_contains($auth->name, 'Hades')){
                     $success['token'] =  $auth->createToken('access_token',["dios", "hades"])->plainTextToken;
+                    $success['roles'] = ['rol1' => $rolHades->nombre,
+                        'rol2' => $rolDios->nombre];
+
                 }
                 else{
                     $success['token'] =  $auth->createToken('access_token',["dios"])->plainTextToken;
+                    $success['rol'] = $rolDios->nombre;
                 }
             }
             else{
                 $success['token'] =  $auth->createToken('access_token',["humano"])->plainTextToken;
+                $success['rol'] = $rolHumano->nombre;
             }
             $success['name'] =  $auth->name;
             return response()->json(["success"=>true,"data"=>$success, "message" => "Logged in!"],200);
@@ -67,6 +76,12 @@ class RegistroController extends Controller
         $success['token']  = $user->createToken('registrado', ["humano"])->plainTextToken;
         $success['name'] =  $user->name;
         $email = $user->email;
+
+        $rolUsuario = new RolUsuario;
+        $rolUsuario->id_usuario = $user->id;
+        $rolUsuario->id_rol = Rol::where('Nombre', 'Humano')->first()->id;
+        $rolUsuario->save();
+        $success['rol'] = Rol::where('Nombre', 'Humano')->first()->nombre;
 
         $datos = [
             'nombre' => $user->name,
