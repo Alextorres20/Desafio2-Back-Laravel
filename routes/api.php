@@ -19,6 +19,7 @@ use App\Http\Controllers\CaracteristicasController;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('crearUsuarios',[DiosController::class, 'crearUsuarios'])->middleware('midCrearHumanos');
+    Route::delete('matarUsuarios',[DiosController::class, 'matarUsuarios'])->middleware('midMatarUsuarios');
 });
 
 Route::controller(RegistroController::class)->group(function (){

@@ -220,4 +220,9 @@ class DiosController extends Controller
         'Usuarios' => $usuarios_creados,
         'DiosHumano' => $dios_humano],201);
     }
+
+    public function matarUsuarios(Request $req){
+        $aleatorio = $req->get('aleatorio');
+
+    }
 }
