@@ -12,7 +12,7 @@ class CreateHumanosTable extends Migration
      * @return void
      */
     public function up()
-    {
+    {//Alicia y Alejandro
         Schema::create('humanos', function (Blueprint $table) {
             $table->primary('id_usuario');
             $table->unsignedBigInteger('id_usuario');

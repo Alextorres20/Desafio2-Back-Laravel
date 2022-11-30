@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Prueba;
 use App\Models\User;
 class PruebaHumanoFactory extends Factory
-{
+{//Alejandro
     /**
      * Define the model's default state.
      *

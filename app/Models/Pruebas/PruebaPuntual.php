@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Pruebas\Prueba;
 
 class PruebaPuntual extends Prueba
-{
+{//Alicia
     use HasFactory;
 
     protected $table = 'pruebas_puntuales';

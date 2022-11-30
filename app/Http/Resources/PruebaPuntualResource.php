@@ -17,6 +17,7 @@ class PruebaPuntualResource extends JsonResource
      */
     public function toArray($request)
     {
+        //Alicia
         return [
             'id' => $this->id,
             'id_dios' => $this->prueba->id_dios,

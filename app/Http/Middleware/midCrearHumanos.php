@@ -15,7 +15,7 @@ class midCrearHumanos
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function handle(Request $request, Closure $next)
-    {
+    {   //Alejandro
         $user = $request->user();
         if($user->tokenCan("dios")) {
             return $next($request);

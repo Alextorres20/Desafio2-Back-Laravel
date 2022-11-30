@@ -12,7 +12,7 @@ class CreateRolesTable extends Migration
      * @return void
      */
     public function up()
-    {
+    {//Alicia
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');

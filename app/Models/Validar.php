@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 
 class Validar extends Model
-{
+{//Alicia
     static function validarPruebaGeneral($input) {
         $messages = [
             'digits_between' => 'Debe ser un número entre 1 y 100',

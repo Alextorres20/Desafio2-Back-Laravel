@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class CaracteristicaUsuario extends Model
-{
+{//Alicia y Alejandro
     use HasFactory;
 
     protected $table = 'caracteristicas_usuarios';

@@ -20,7 +20,7 @@ use Illuminate\Support\Str;
 
 class RegistroController extends Controller
 {
-    //
+    // Todo Alejandro
     public function iniciarSesion(Request $request)
     {
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){

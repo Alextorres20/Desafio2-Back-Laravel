@@ -15,7 +15,7 @@ use Faker;
 
 class DiosController extends Controller
 {
-    //
+    // Todo Alejandro
 
     public function asignarProteccion($id_usuario){
         $Zeus_Caracteristicas = CaracteristicaUsuario::where('id_usuario', '16')->get();

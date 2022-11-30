@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 class DiosHumanoFactory extends Factory
-{
+{//Alejandro
     /**
      * Define the model's default state.
      *
