@@ -18,9 +18,11 @@ use App\Http\Controllers\PruebasController;
 */
 
 Route::middleware('auth:sanctum')->group(function () {
+    // Alejandro
     Route::post('crearUsuarios',[DiosController::class, 'crearUsuarios'])->middleware('midCrearHumanos');
 });
 
+//Alejandro
 Route::controller(RegistroController::class)->group(function (){
     Route::post('registrar', 'registrar');
     Route::get('verificar/{id}', 'verificar');
@@ -29,4 +31,5 @@ Route::controller(RegistroController::class)->group(function (){
 });
 
 
+//Alicia
 Route::resource('pruebas', PruebasController::class)->middleware('auth:sanctum', 'midCrearPruebas');

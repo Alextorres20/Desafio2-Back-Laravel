@@ -12,7 +12,7 @@ class CreateCaracteristicasTable extends Migration
      * @return void
      */
     public function up()
-    {
+    {//Alicia y Alejandro
         Schema::create('caracteristicas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre')->unique();

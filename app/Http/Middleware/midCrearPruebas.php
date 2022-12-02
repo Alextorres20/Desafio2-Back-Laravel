@@ -16,6 +16,7 @@ class midCrearPruebas
      */
     public function handle(Request $request, Closure $next)
     {
+        // Alicia
         $user = $request->user();
         if ($user->tokenCan("dios")) {
             return $next($request);

@@ -13,6 +13,7 @@ class CreateRolesUsuariosTable extends Migration
      */
     public function up()
     {
+        //Alicia
         Schema::create('roles_usuarios', function (Blueprint $table) {
             $table->unsignedBigInteger('id_usuario');
             $table->unsignedBigInteger('id_rol');

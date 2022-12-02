@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
-{
+{//Alejandro
     /**
      * Seed the application's database.
      *
