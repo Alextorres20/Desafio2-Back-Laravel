@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Pruebas\Prueba;
 
-class PruebaPuntual extends Prueba
+class PruebaPuntual extends Model
 {//Alicia
     use HasFactory;
 

@@ -14,7 +14,7 @@ class PruebaOraculoLibre extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'id',
+        'id_prueba_oraculo',
         'porcentaje',
         'palabras_clave'
     ];

@@ -8,6 +8,7 @@ use App\Http\Controllers\CaracteristicasController;
 use App\Models\Caracteristica;
 use App\Models\CaracteristicaUsuario;
 use App\Models\DiosHumano;
+use App\Models\Humano;
 use App\Models\Rol;
 use App\Models\RolUsuario;
 use App\Models\User;
@@ -20,9 +21,13 @@ class DiosController extends Controller
     // Todo Alejandro
 
     public function asignarProteccion($id_usuario){
-        $Zeus_Caracteristicas = CaracteristicaUsuario::where('id_usuario', '16')->get();
-        $Poseidon_Caracteristicas = CaracteristicaUsuario::where('id_usuario', '17')->get();
-        $Hades_Caracteristicas = CaracteristicaUsuario::where('id_usuario', '18')->get();
+        $zeus_ID = User::where('name', 'Zeus')->first()->id;
+        $poseidon_ID = User::where('name', 'Poseidon')->first()->id;
+        $hades_ID = User::where('name', 'Hades')->first()->id;
+
+        $Zeus_Caracteristicas = CaracteristicaUsuario::where('id_usuario', $zeus_ID)->get();
+        $Poseidon_Caracteristicas = CaracteristicaUsuario::where('id_usuario', $poseidon_ID)->get();
+        $Hades_Caracteristicas = CaracteristicaUsuario::where('id_usuario', $hades_ID)->get();
         $usuario = CaracteristicaUsuario::where('id_usuario', $id_usuario)->get();
 
         // Este algoritmo calculara de forma "competitiva" entre los tres dioses quien tiene mas puntos
@@ -209,6 +214,12 @@ class DiosController extends Controller
             $dios_humano->id_humano = $usuario->id;
             $dios_humano->save();
             array_push($usuarios_creados, $usuario);
+
+            $humano = new Humano;
+            $humano->id_usuario = $usuario->id;
+            $humano->destino = 0;
+            $humano->donde_murio = null;
+            $humano->save();
 
             $rolUsuario = new RolUsuario;
             $rolUsuario->id_usuario = $usuario->id;

@@ -14,10 +14,10 @@ class CreatePruebaOraculoLibreTable extends Migration
     public function up()
     {//Alicia y Alejandro
         Schema::create('pruebas_oraculo_libre', function (Blueprint $table) {
-            $table->unsignedBigInteger('id');
-            $table->foreign('id')->references('id')->on('pruebas_oraculo')->onDelete('cascade');
+            $table->unsignedBigInteger('id_prueba_oraculo');
+            $table->foreign('id_prueba_oraculo')->references('id')->on('pruebas_oraculo')->onDelete('cascade');
             $table->string('palabras_clave');
-            $table->integer('dificultad');
+            $table->integer('porcentaje');
         });
     }
 
