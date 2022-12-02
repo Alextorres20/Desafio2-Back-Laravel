@@ -8,6 +8,7 @@ use App\Http\Controllers\CaracteristicasController;
 use App\Models\Caracteristica;
 use App\Models\CaracteristicaUsuario;
 use App\Models\DiosHumano;
+use App\Models\Humano;
 use App\Models\Rol;
 use App\Models\RolUsuario;
 use App\Models\User;
@@ -223,6 +224,17 @@ class DiosController extends Controller
 
     public function matarUsuarios(Request $req){
         $aleatorio = $req->get('aleatorio');
+        $usuarios = Humano::all();
+        $usuariosMuertos = [];
+        for ($i=0; $i < $aleatorio; $i++) {
+            $numAleatorio = rand(1, $usuarios->last()->id_usuario);
+            $usuario = Humano::where('id_usuario', $numAleatorio)->first();
+            if($usuario != null && $usuario->donde_murio == null){
+                $usuario::where('id_usuario', $numAleatorio)->update(['donde_murio' => "Tartaro"]);
+                array_push($usuariosMuertos, $usuario);
+            }
+        }
 
+        return response()->json(['Humanos que han muerto' => $usuariosMuertos]);
     }
 }

@@ -9,6 +9,10 @@ class Humano extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'donde_murio'
+    ];
+
     public $incrementing = false; //Para indicarle que la clave no es autoincremental.
 
 }
