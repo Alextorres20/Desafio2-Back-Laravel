@@ -14,7 +14,7 @@ class PruebaOraculo extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'id',
+        'id_prueba',
         'tipo',
         'pregunta'
     ];

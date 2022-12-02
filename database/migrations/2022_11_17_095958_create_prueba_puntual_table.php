@@ -14,8 +14,8 @@ class CreatePruebaPuntualTable extends Migration
     public function up()
     {//Alicia y Alejandro
         Schema::create('pruebas_puntuales', function (Blueprint $table) {
-            $table->unsignedBigInteger('id');
-            $table->foreign('id')->references('id')->on('pruebas')->onDelete('cascade');
+            $table->unsignedBigInteger('id_prueba');
+            $table->foreign('id_prueba')->references('id')->on('pruebas')->onDelete('cascade');
             $table->text('descripcion')->nullable();
             $table->unsignedBigInteger('id_caracteristica');
             $table->foreign('id_caracteristica')->references('id')->on('caracteristicas')->onDelete('cascade');

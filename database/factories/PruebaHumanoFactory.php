@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Prueba;
+use App\Models\Pruebas\Prueba;
 use App\Models\User;
 class PruebaHumanoFactory extends Factory
 {//Alejandro
