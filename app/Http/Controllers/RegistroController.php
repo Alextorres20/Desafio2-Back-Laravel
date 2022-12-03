@@ -6,13 +6,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CaracteristicasController;
 use App\Http\Controllers\DiosController;
+use App\Models\Rol;
 use App\Models\User;
 use App\Models\Humano;
+use App\Models\RolUsuario;
 use App\Models\DiosHumano;
 use App\Models\Caracteristica;
 use App\Models\CaracteristicaUsuario;
-use App\Models\Rol;
-use App\Models\RolUsuario;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Validator;
@@ -22,7 +22,7 @@ use Illuminate\Support\Str;
 
 class RegistroController extends Controller
 {
-    //
+    // Alejandro y Alicia
     public function iniciarSesion(Request $request)
     {
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
@@ -30,31 +30,23 @@ class RegistroController extends Controller
             $rolDios = Rol::where('Nombre', 'Dios')->first();
             $rolHumano = Rol::where('Nombre', 'Humano')->first();
             $auth = Auth::user();
-            if(str_contains($auth->email, 'zeus') || str_contains($auth->email, 'poseidon') || str_contains($auth->email, 'hades')){
-                if(str_contains($auth->name, 'Hades')){
-                    $success['token'] =  $auth->createToken('access_token',["dios", "hades"])->plainTextToken;
-                    $success['roles'] = ['rol1' => $rolHades->nombre,
-                        'rol2' => $rolDios->nombre];
+            $perfiles = Rol::whereIn('id', RolUsuario::where('id_usuario', $auth->id)->get('id_rol'))->get('nombre');
 
-                }
-                else{
-                    $success['token'] =  $auth->createToken('access_token',["dios"])->plainTextToken;
-                    $success['rol'] = $rolDios->nombre;
-                }
+            $abilities = [];
+            foreach ($perfiles as $value) {
+                array_push($abilities, strtolower($value->nombre));
             }
-            else{
-                $success['token'] =  $auth->createToken('access_token',["humano"])->plainTextToken;
-                $success['rol'] = $rolHumano->nombre;
-            }
+            $success['token'] =  $auth->createToken('access_token', $abilities)->plainTextToken;
             $success['name'] =  $auth->name;
-            return response()->json(["success"=>true,"data"=>$success, "message" => "Logged in!"],200);
+
+            return response()->json(["success"=>true,"data"=>$success, "message" => "Sesión iniciada"],200);
         }
         else{
-            return response()->json(["success"=>false, "message" => "Unauthorised"],202);
+            return response()->json(["success"=>false, "message" => "No autorizado"],202);
         }
     }
 
-
+    // Alejandro
     public function registrar(Request $request)
     {
         $messages = [
@@ -102,6 +94,7 @@ class RegistroController extends Controller
         return response()->json(['mens' => $mensaje], 201);
     }
 
+    // Alejandro
     public function verificar($id, Request $re){
         $usuarioVerificado = User::where('id', $id)
         ->update(['email_verified_at' => Carbon::now()->toDateTimeString(),
@@ -128,6 +121,7 @@ class RegistroController extends Controller
         200);
     }
 
+    // Alejandro
     public function cerrarSesion(Request $request)
     {
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){

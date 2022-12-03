@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class midCrearHumanos
+class midCrearPruebas
 {
     /**
      * Handle an incoming request.
@@ -15,13 +15,13 @@ class midCrearHumanos
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function handle(Request $request, Closure $next)
-    {   //Alejandro
+    {
+        // Alicia
         $user = $request->user();
-        if($user->tokenCan("dios")) {
+        if ($user->tokenCan("dios")) {
             return $next($request);
-        }
-        else{
-            return response()->json(["success"=>false, "message" => "No eres un dios, ¡OSAS atreverte a crear humanos cuando ni siquiera tienes poderes divinos!"], 401);
+        } else {
+            return response()->json(["success"=>false, "message" => "Unauthorised"],202);
         }
     }
 }

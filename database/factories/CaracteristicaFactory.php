@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CaracteristicaFactory extends Factory
-{
+{//Alejandro
     /**
      * Define the model's default state.
      *

@@ -12,7 +12,7 @@ class CreateCaracteristicasUsuariosTable extends Migration
      * @return void
      */
     public function up()
-    {
+    {//Alicia y Alejandro
         Schema::create('caracteristicas_usuarios', function (Blueprint $table) {
             $table->primary(['id_usuario', 'id_caracteristica']);
             $table->unsignedBigInteger('id_usuario');

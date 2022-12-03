@@ -1,11 +1,11 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Pruebas;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Prueba;
+use App\Models\Pruebas\Prueba;
 class PruebaOraculoFactory extends Factory
-{
+{//Alejandro
     /**
      * Define the model's default state.
      *
@@ -16,9 +16,8 @@ class PruebaOraculoFactory extends Factory
         return [
             //
             'id_prueba' => $this->faker->randomElement(Prueba::get('id')),
-            // 'tipo_oraculo' => $this->faker->randomElement(['Respuesta libre', 'Valoracion', 'Eleccion']),
-            'pregunta' => $this->faker->text(rand(5,10)),
-            'respuesta' => $this->faker->text(rand(5,20))
+            'tipo' => $this->faker->randomElement(['Respuesta libre', 'Valoracion', 'Eleccion']),
+            'pregunta' => $this->faker->text(rand(5,10))
         ];
     }
 }

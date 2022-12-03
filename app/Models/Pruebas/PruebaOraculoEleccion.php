@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Pruebas;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Humano extends Model
-{//Alicia y Alejandro
+class PruebaOraculoEleccion extends Model
+{//Alicia
     use HasFactory;
 
+    protected $table = 'pruebas_oraculo_eleccion';
     public $incrementing = false;
     public $timestamps = false;
 }

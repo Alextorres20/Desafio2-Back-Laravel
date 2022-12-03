@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 use App\Models\Caracteristica;
 class CaracteristicaUsuarioFactory extends Factory
-{
+{//Alejandro
     /**
      * Define the model's default state.
      *

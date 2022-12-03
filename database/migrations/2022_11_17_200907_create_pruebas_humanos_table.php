@@ -12,7 +12,7 @@ class CreatePruebasHumanosTable extends Migration
      * @return void
      */
     public function up()
-    {
+    {//Alicia y Alejandro
         Schema::create('pruebas_humanos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_prueba');

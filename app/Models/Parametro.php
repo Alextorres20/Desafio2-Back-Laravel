@@ -5,8 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PruebaOraculoEleccion extends Model
+class Parametro extends Model
 {
+    //Alejandro
     use HasFactory;
-    protected $table = 'prueba_oraculo_eleccion';
+
+
+
 }

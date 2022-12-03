@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\CaracteristicaUsuario;
 class CaracteristicasController extends Controller
 {
-    //
+    // Alejandro
     public function asignarCaracteristicas($id, $id_caracteristica){
 
 
