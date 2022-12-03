@@ -19,9 +19,10 @@ use App\Http\Controllers\PruebasController;
 
 Route::middleware('auth:sanctum')->group(function () {
     // Alejandro
-    Route::post('crearUsuarios',[DiosController::class, 'crearUsuarios'])->middleware('midCrearHumanos');
-    Route::put('matarUnUsuario',[DiosController::class, 'matarUnUsuario'])->middleware('midMatarUsuarios');
-    Route::put('matarUsuarios',[DiosController::class, 'matarUsuarios'])->middleware('midMatarUsuarios');
+    Route::post('crearUsuarios',[DiosController::class, 'crearUsuarios'])->middleware('midDios');
+    Route::get('mostrarHumanosVivos',[DiosController::class, 'mostrarHumanosVivos'])->middleware('midDios');
+    Route::put('matarUsuario',[DiosController::class, 'matarUsuario'])->middleware('midMatarUsuarios');
+    Route::put('matarUsuariosAlAzar',[DiosController::class, 'matarUsuariosAlAzar'])->middleware('midMatarUsuarios');
 
 });
 //Alejandro
