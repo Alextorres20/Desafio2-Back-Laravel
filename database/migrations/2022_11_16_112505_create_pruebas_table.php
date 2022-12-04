@@ -18,6 +18,7 @@ class CreatePruebasTable extends Migration
             $table->unsignedBigInteger('id_dios');
             $table->foreign('id_dios')->references('id')->on('users')->onDelete('cascade');
             $table->integer('cantidad_destino');
+            $table->string('tipo');
             $table->timestamps();
         });
     }

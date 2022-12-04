@@ -74,10 +74,12 @@ class PruebasController extends Controller
 
     private function insertarGeneral($request) {
         $datos = [
-            'id_dios' => 1,
+            'id_dios' => $request->user()->id,
+            'tipo' => $request->tipo,
             'cantidad_destino' => $request->destino,
             'created_at' => Carbon::now()
         ];
+
         return Prueba::create($datos);
     }
 
@@ -85,7 +87,6 @@ class PruebasController extends Controller
     private function insertarOraculo($request, $prueba){
         $datos = [
             'id' => $prueba->id,
-            'tipo' => $request->tipo,
             'pregunta' => $request->pregunta
         ];
 

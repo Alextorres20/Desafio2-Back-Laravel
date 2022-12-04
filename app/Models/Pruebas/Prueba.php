@@ -11,6 +11,7 @@ class Prueba extends Model
 
     protected $fillable = [
         'id_dios',
+        'tipo',
         'cantidad_destino'
     ];
 

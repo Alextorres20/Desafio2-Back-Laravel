@@ -17,7 +17,7 @@ class CreatePruebaOraculoLibreTable extends Migration
             $table->unsignedBigInteger('id');
             $table->foreign('id')->references('id')->on('pruebas_oraculo')->onDelete('cascade');
             $table->string('palabras_clave');
-            $table->integer('dificultad');
+            $table->integer('porcentaje');
         });
     }
 

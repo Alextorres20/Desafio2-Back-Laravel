@@ -15,7 +15,6 @@ class PruebaOraculo extends Model
 
     protected $fillable = [
         'id',
-        'tipo',
         'pregunta'
     ];
 }

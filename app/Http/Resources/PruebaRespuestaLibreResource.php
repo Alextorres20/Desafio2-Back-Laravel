@@ -18,14 +18,13 @@ class PruebaRespuestaLibreResource extends JsonResource
         //Alicia
         return [
             'id' => $this->id,
-            'id_dios' => $this->prueba->id_dios,
-            'nombre_dios' => User::where('id', $this->prueba->id_dios)->value('name'),
-            'cantidad_destino' => $this->prueba->cantidad_destino,
-            'tipo' => $this->oraculo->tipo,
-            'pregunta_descripcion' => $this->oraculo->pregunta,
-            'porcentaje' => $this->porcentaje,
-            'palabras_clave' => $this->palabras_clave,
-            'fecha_creacion' => $this->prueba->created_at->format('d-m-Y')
+            'idDios' => $this->prueba->id_dios,
+            'nombreDios' => User::where('id', $this->prueba->id_dios)->value('name'),
+            'cantidadDestino' => $this->prueba->cantidad_destino,
+            'preguntaDescripcion' => $this->oraculo->pregunta,
+            'palabrasClave' => $this->palabras_clave,
+            'fechaCreacion' => $this->prueba->created_at->format('d-m-Y'),
+            'tipo' =>$this->prueba->tipo
         ];
     }
 }

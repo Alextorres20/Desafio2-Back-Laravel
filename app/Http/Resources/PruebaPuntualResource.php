@@ -20,13 +20,14 @@ class PruebaPuntualResource extends JsonResource
         //Alicia
         return [
             'id' => $this->id,
-            'id_dios' => $this->prueba->id_dios,
-            'nombre_dios' => User::where('id', $this->prueba->id_dios)->value('name'),
-            'cantidad_destino' => $this->prueba->cantidad_destino,
-            'pregunta_descripcion' => $this->descripcion,
+            'idDios' => $this->prueba->id_dios,
+            'nombreDios' => User::where('id', $this->prueba->id_dios)->value('name'),
+            'cantidadDestino' => $this->prueba->cantidad_destino,
+            'preguntaDescripcion' => $this->descripcion,
             'atributo' => Caracteristica::where('id', $this->id_caracteristica)->value('nombre'),
             'dificultad' => $this->dificultad,
-            'fecha_creacion' => $this->prueba->created_at->format('d-m-Y')
+            'fechaCreacion' => $this->prueba->created_at->format('d-m-Y'),
+            'tipo' => $this->prueba->tipo
         ];
     }
 }
