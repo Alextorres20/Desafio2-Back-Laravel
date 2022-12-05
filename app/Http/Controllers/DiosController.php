@@ -12,6 +12,7 @@ use App\Models\Humano;
 use App\Models\Rol;
 use App\Models\RolUsuario;
 use App\Models\User;
+use App\Models\Parametro;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Faker;
@@ -230,5 +231,56 @@ class DiosController extends Controller
         'Cantidad de usuarios ' => $cantidad,
         'Usuarios' => $usuarios_creados,
         'DiosHumano' => $dios_humano],201);
+    }
+
+    public function mostrarHumanosVivos(){
+        $usuariosVivos = Humano::where('donde_murio', 'Vivo')->get();
+        return response()->json($usuariosVivos);
+    }
+
+    public function obtenerHumanosVivos(){
+        $usuariosVivos = Humano::where('donde_murio', 'Vivo')->get();
+        return $usuariosVivos;
+    }
+
+    public function matarUsuario(Request $req){
+
+        $humano = Humano::where('id_usuario', $req->get('id_usuario'))->where('donde_murio', 'Vivo')->first();
+        $exigir = Parametro::where('nombre', 'Exigir')->first();
+        if($humano->destino >= $exigir->valor){
+            $humano::where('id_usuario', $humano->id_usuario)->update(['donde_murio' => "Campo de Eliseos"]);
+            $mensaje = ['El humano ha muerto, pero al menos esta en el campo de Eliseos'];
+        }
+        else{
+            $humano::where('id_usuario', $humano->id_usuario)->update(['donde_murio' => "Tartaros"]);
+            $mensaje = ['Que los dioses tengan piedad de esta pobre alma, el humano ha ido a Tartaros'];
+        }
+
+        return response()->json(['mens' => $mensaje], 201);
+
+
+    }
+
+    public function matarUsuariosAlAzar(){
+        $humanosVivos = self::obtenerHumanosVivos();
+        $aleatorio = rand(1, count($humanosVivos));
+        $exigir = Parametro::where('nombre', 'Exigir')->first();
+        $campoEliseos = [];
+        $tartaros = [];
+        for ($i=0; $i < $aleatorio; $i++) {
+            if($humanosVivos[$i]->destino >= $exigir->valor){
+                $humanosVivos[$i]::where('id_usuario', $humanosVivos[$i]->id_usuario)
+                ->update(['donde_murio' => "Campo de Eliseos"]);
+                array_push($campoEliseos, $humanosVivos[$i]);
+            }
+            else{
+                $humanosVivos[$i]::where('id_usuario', $humanosVivos[$i]->id_usuario)
+                ->update(['donde_murio' => "Tartaros"]);
+                array_push($tartaros, $humanosVivos[$i]);
+            }
+        }
+
+        return response()->json(['Humanos que han ido a Campo Eliseos' => count($campoEliseos),
+        'Humanos que han ido a Tartaros' => count($tartaros)]);
     }
 }
