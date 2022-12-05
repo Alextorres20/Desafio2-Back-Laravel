@@ -1,9 +1,9 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Pruebas;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Prueba;
+use App\Models\Pruebas\Prueba;
 use App\Models\Caracteristica;
 class PruebaPuntualFactory extends Factory
 {//Alejandro

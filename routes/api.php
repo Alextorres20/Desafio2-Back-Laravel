@@ -19,17 +19,23 @@ use App\Http\Controllers\PruebasController;
 
 Route::middleware('auth:sanctum')->group(function () {
     // Alejandro
-    Route::post('crearUsuarios',[DiosController::class, 'crearUsuarios'])->middleware('midCrearHumanos');
-});
+    Route::post('crearUsuarios',[DiosController::class, 'crearUsuarios'])->middleware('midDios');
+    Route::get('mostrarHumanosVivos',[DiosController::class, 'mostrarHumanosVivos'])->middleware('midDios');
+    Route::put('matarUsuario',[DiosController::class, 'matarUsuario'])->middleware('midMatarUsuarios');
+    Route::put('matarUsuariosAlAzar',[DiosController::class, 'matarUsuariosAlAzar'])->middleware('midMatarUsuarios');
 
+});
 //Alejandro
 Route::controller(RegistroController::class)->group(function (){
     Route::post('registrar', 'registrar');
     Route::get('verificar/{id}', 'verificar');
+
     Route::post('iniciarSesion','iniciarSesion');
     Route::post('cerrarSesion','cerrarSesion');
 });
 
-
+// Route::controller(CaracteristicasController::class)->group(function (){
+//     Route::post('asignarCaracteristicas/{id}', 'asignarCaracteristicas');
+// });
 //Alicia
 Route::resource('pruebas', PruebasController::class)->middleware('auth:sanctum', 'midCrearPruebas');
