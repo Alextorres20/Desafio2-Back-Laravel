@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CaracteristicaUsuario;
+use App\Models\DiosHumano;
+use App\Models\User;
 class CaracteristicasController extends Controller
 {
     // Alejandro
@@ -21,5 +23,13 @@ class CaracteristicasController extends Controller
             $mensaje = 'Clave duplicada o algo malo ha salido';
         }
         return $mensaje;
+    }
+
+    public function mostrarCaracteristicas_Dios ($id_usuario){
+        $humano_caracteristicas = CaracteristicaUsuario::where('id_usuario', $id_usuario)->get();
+        $humano_dios = DiosHumano::where('id_humano', $id_usuario)->first();
+        $dios = User::where('id', $humano_dios->id_dios)->first();
+        return response()->json(['caracteristicas' => $humano_caracteristicas,
+        'protegido_por' => $dios->name], 200);
     }
 }
