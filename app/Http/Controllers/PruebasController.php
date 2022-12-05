@@ -23,16 +23,14 @@ class PruebasController extends Controller
         $respLibre = json_decode(json_encode(PruebaRespuestaLibreResource::collection(PruebaOraculoLibre::all())), true);
         $datos = array_merge($puntuales, $respLibre);
 
-        if ($datos) {
-            return response()->json(['estado' => 'ok', 'respuesta' => $datos ], 200);
-        } else {
-            return response()->json(['estado' => 'error'], 200);
-        }
+        return response()->json([ 'estado' => 'ok', 'respuesta' => $datos ], 200);
     }
+
 
     function show(Request $request) {
 
     }
+
 
     function store(Request $request) {
         $respuesta = null;
