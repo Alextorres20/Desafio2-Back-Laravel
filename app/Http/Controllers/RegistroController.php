@@ -101,7 +101,7 @@ class RegistroController extends Controller
         $humano = new Humano;
         $humano->id_usuario = $id;
         $humano->destino = 0;
-        $humano->donde_murio = null;
+        $humano->donde_murio = 'Vivo';
         $humano->save();
 
 
