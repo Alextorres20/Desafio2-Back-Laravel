@@ -285,7 +285,9 @@ class DiosController extends Controller
             }
         }
 
-        return response()->json(['Humanos que han ido a Campo Eliseos' => count($campoEliseos),
-        'Humanos que han ido a Tartaros' => count($tartaros)]);
+        return response()->json(['Cantidad_Campo_Eliseos' => count($campoEliseos),
+        'Humano_Campo_Eliseos' => $campoEliseos,
+        'Cantidad_Tartaros' => count($tartaros),
+        'Humano_Tartaros' => $tartaros]);
     }
 }

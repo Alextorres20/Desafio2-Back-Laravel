@@ -34,7 +34,7 @@ Route::controller(RegistroController::class)->group(function (){
     Route::post('iniciarSesion','iniciarSesion');
     Route::post('cerrarSesion','cerrarSesion');
 });
-
+//Alejandro
 Route::controller(CaracteristicasController::class)->group(function (){
     Route::get('mostrarCaracteristicas_Dios/{id_usuario}', 'mostrarCaracteristicas_Dios');
 });
