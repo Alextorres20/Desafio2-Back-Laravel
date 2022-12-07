@@ -253,11 +253,13 @@ class DiosController extends Controller
         $humano = Humano::where('id_usuario', $req->get('id_usuario'))->where('donde_murio', 'Vivo')->first();
         $exigir = Parametro::where('nombre', 'Exigir')->first();
         if($humano->destino >= $exigir->valor){
-            $humano::where('id_usuario', $humano->id_usuario)->update(['donde_murio' => "Campo de Eliseos"]);
+            $humano::where('id_usuario', $humano->id_usuario)->update(['donde_murio' => "Campo de Eliseos",
+            'fecha_de_muerte' => Carbon::now()->toDateTimeString()]);
             $mensaje = ['El humano ha muerto, pero al menos esta en el campo de Eliseos'];
         }
         else{
-            $humano::where('id_usuario', $humano->id_usuario)->update(['donde_murio' => "Tartaros"]);
+            $humano::where('id_usuario', $humano->id_usuario)->update(['donde_murio' => "Tartaros",
+            'fecha_de_muerte' => Carbon::now()->toDateTimeString()]);
             $mensaje = ['Que los dioses tengan piedad de esta pobre alma, el humano ha ido a Tartaros'];
         }
 
@@ -275,12 +277,14 @@ class DiosController extends Controller
         for ($i=0; $i < $aleatorio; $i++) {
             if($humanosVivos[$i]->destino >= $exigir->valor){
                 $humanosVivos[$i]::where('id_usuario', $humanosVivos[$i]->id_usuario)
-                ->update(['donde_murio' => "Campo de Eliseos"]);
+                ->update(['donde_murio' => "Campo de Eliseos",
+                'fecha_de_muerte' => Carbon::now()->toDateTimeString()]);
                 array_push($campoEliseos, $humanosVivos[$i]);
             }
             else{
                 $humanosVivos[$i]::where('id_usuario', $humanosVivos[$i]->id_usuario)
-                ->update(['donde_murio' => "Tartaros"]);
+                ->update(['donde_murio' => "Tartaros",
+                'fecha_de_muerte' => Carbon::now()->toDateTimeString()]);
                 array_push($tartaros, $humanosVivos[$i]);
             }
         }
@@ -289,5 +293,20 @@ class DiosController extends Controller
         'Humano_Campo_Eliseos' => $campoEliseos,
         'Cantidad_Tartaros' => count($tartaros),
         'Humano_Tartaros' => $tartaros]);
+    }
+
+    public function mostrarMuertos(){
+        $humanosMuertos = Humano::where('donde_murio', '!=' , 'Vivo')->get();
+        return response()->json($humanosMuertos);
+    }
+
+    public function mostrarMuertosAscendiente(){
+        $humanosMuertos = Humano::orderBy('fecha_de_muerte', 'asc')->where('donde_murio', '!=' , 'Vivo')->get();
+        return response()->json($humanosMuertos);
+    }
+
+    public function mostrarMuertosDescendiente(){
+        $humanosMuertos = Humano::orderBy('fecha_de_muerte', 'desc')->where('donde_murio', '!=' , 'Vivo')->get();
+        return response()->json($humanosMuertos);
     }
 }

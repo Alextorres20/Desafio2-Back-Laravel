@@ -22,8 +22,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('crearUsuarios',[DiosController::class, 'crearUsuarios'])->middleware('midDios');
     Route::get('mostrarHumanosVivos',[DiosController::class, 'mostrarHumanosVivos'])->middleware('midDios');
     Route::get('mostrarHumanoVivo/{id}',[DiosController::class, 'mostrarHumanoVivo'])->middleware('midDios');
-    Route::put('matarUsuario',[DiosController::class, 'matarUsuario'])->middleware('midMatarUsuarios');
-    Route::put('matarUsuariosAlAzar',[DiosController::class, 'matarUsuariosAlAzar'])->middleware('midMatarUsuarios');
+    Route::put('matarUsuario',[DiosController::class, 'matarUsuario'])->middleware('midHades');
+    Route::put('matarUsuariosAlAzar',[DiosController::class, 'matarUsuariosAlAzar'])->middleware('midHades');
+    Route::get('mostrarMuertos',[DiosController::class, 'mostrarMuertos'])->middleware('midHades');
+    Route::get('mostrarMuertosAscendiente', [DiosController::class, 'mostrarMuertosAscendiente'])->middleware('midHades');
+    Route::get('mostrarMuertosDescendiente', [DiosController::class, 'mostrarMuertosDescendiente'])->middleware('midHades');
 
 });
 //Alejandro

@@ -19,6 +19,7 @@ class CreateHumanosTable extends Migration
             $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade');
             $table->integer('destino');
             $table->string('donde_murio')->nullable();
+            $table->dateTime('fecha_de_muerte')->nullable();
         });
     }
 
