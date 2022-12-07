@@ -219,7 +219,7 @@ class DiosController extends Controller
             $humano = new Humano;
             $humano->id_usuario = $usuario->id;
             $humano->destino = 0;
-            $humano->donde_murio = null;
+            $humano->donde_murio = 'Vivo';
             $humano->save();
 
             $rolUsuario = new RolUsuario;
@@ -229,9 +229,14 @@ class DiosController extends Controller
         }
         return response()->json(['Dios' => $auth->name,
         'Cantidad de usuarios ' => $cantidad,
-        'Usuarios' => $usuarios_creados,
-        'DiosHumano' => $dios_humano],201);
+        'Usuarios' => $usuarios_creados],201);
     }
+
+    public function mostrarHumanoVivo($id){
+        $humanoVivo = Humano::where('id_usuario', $id)->where('donde_murio', 'Vivo')->first();
+        return response()->json($humanoVivo);
+    }
+
 
     public function mostrarHumanosVivos(){
         $usuariosVivos = Humano::where('donde_murio', 'Vivo')->get();
