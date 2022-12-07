@@ -3,9 +3,10 @@
 namespace App\Models\Pruebas;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
-class PruebaOraculoLibre extends Model
+class PruebaOraculoLibre extends Prueba
 {//Alicia
     use HasFactory;
 

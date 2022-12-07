@@ -27,10 +27,10 @@ class PruebasController extends Controller
     }
 
 
-    function show(Request $request) {
+   /*  function show(Request $request) {
 
     }
-
+ */
 
     function store(Request $request) {
         $respuesta = null;
@@ -133,5 +133,20 @@ class PruebasController extends Controller
         ];
 
         return new PruebaPuntualResource(PruebaPuntual::create($datos));
+    }
+
+    /* function update(User $user, Request $request) {
+        $user->update($request->all());
+        return new userResource($user);
+    }
+ */
+
+    function destroy(Prueba $prueba) {
+        try {
+            $prueba->delete();
+            return response()->json(['estado' => 'ok', 'datos' => $prueba], 200);
+        } catch (Exception $e) {
+            return response()->json(['estado' => 'error', 'datos' => $prueba], 400);
+        }
     }
 }
