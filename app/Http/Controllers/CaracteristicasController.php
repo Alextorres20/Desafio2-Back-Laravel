@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CaracteristicaUsuario;
+use App\Models\Caracteristica;
 use App\Models\DiosHumano;
 use App\Models\User;
+
+
 class CaracteristicasController extends Controller
 {
     // Alejandro
@@ -32,4 +35,11 @@ class CaracteristicasController extends Controller
         return response()->json(['caracteristicas' => $humano_caracteristicas,
         'protegido_por' => $dios->name], 200);
     }
+
+
+    public function mostrarCaracteristicasHumano ($id_usuario){
+        $caracteristicas = CaracteristicaUsuario::with('caracteristica')->where('id_usuario', $id_usuario)->get();
+        return response()->json(['caracteristicas' => $caracteristicas], 200);
+    }
+
 }

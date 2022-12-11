@@ -24,19 +24,19 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('mostrarHumanoVivo/{id}',[DiosController::class, 'mostrarHumanoVivo'])->middleware('midDios');
     Route::put('matarUsuario',[DiosController::class, 'matarUsuario'])->middleware('midMatarUsuarios');
     Route::put('matarUsuariosAlAzar',[DiosController::class, 'matarUsuariosAlAzar'])->middleware('midMatarUsuarios');
-
+    Route::get('obtenerHumanosDios', [DiosController::class, 'obtenerHumanosDios'])->middleware('midDios');
 });
 //Alejandro
 Route::controller(RegistroController::class)->group(function (){
     Route::post('registrar', 'registrar');
     Route::get('verificar/{id}', 'verificar');
-
     Route::post('iniciarSesion','iniciarSesion');
     Route::post('cerrarSesion','cerrarSesion');
 });
 
 Route::controller(CaracteristicasController::class)->group(function (){
     Route::get('mostrarCaracteristicas_Dios/{id_usuario}', 'mostrarCaracteristicas_Dios');
+    Route::get('mostrarCaracteristicasHumano/{id_usuario}', 'mostrarCaracteristicasHumano');
 });
 
 // Route::controller(CaracteristicasController::class)->group(function (){
