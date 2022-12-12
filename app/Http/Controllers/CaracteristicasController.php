@@ -13,8 +13,6 @@ class CaracteristicasController extends Controller
 {
     // Alejandro
     public function asignarCaracteristicas($id, $id_caracteristica){
-
-
         try {
             $carac_user = new CaracteristicaUsuario;
             $carac_user->id_usuario = $id;

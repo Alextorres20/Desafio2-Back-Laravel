@@ -17,14 +17,30 @@ use App\Http\Controllers\PruebasController;
 |
 */
 
+
 Route::middleware('auth:sanctum')->group(function () {
     // Alejandro
-    Route::post('crearUsuarios',[DiosController::class, 'crearUsuarios'])->middleware('midDios');
-    Route::get('mostrarHumanosVivos',[DiosController::class, 'mostrarHumanosVivos'])->middleware('midDios');
-    Route::get('mostrarHumanoVivo/{id}',[DiosController::class, 'mostrarHumanoVivo'])->middleware('midDios');
-    Route::put('matarUsuario',[DiosController::class, 'matarUsuario'])->middleware('midMatarUsuarios');
-    Route::put('matarUsuariosAlAzar',[DiosController::class, 'matarUsuariosAlAzar'])->middleware('midMatarUsuarios');
-    Route::get('obtenerHumanosDios', [DiosController::class, 'obtenerHumanosDios'])->middleware('midDios');
+    Route::controller(DiosController::class)->group(function (){
+        Route::post('crearUsuarios', 'crearUsuarios')->middleware('midDios');
+        Route::get('mostrarHumanosVivos', 'mostrarHumanosVivos')->middleware('midDios');
+        Route::get('mostrarHumanoVivo/{id}', 'mostrarHumanoVivo')->middleware('midDios');
+        Route::put('matarUsuario', 'matarUsuario')->middleware('midMatarUsuarios');
+        Route::put('matarUsuariosAlAzar', 'matarUsuariosAlAzar')->middleware('midMatarUsuarios');
+        Route::get('obtenerHumanosDios', 'obtenerHumanosDios')->middleware('midDios');
+    });
+
+    //Alejandro y Alicia
+    Route::controller(CaracteristicasController::class)->group(function (){
+        Route::get('mostrarCaracteristicas_Dios/{id_usuario}', 'mostrarCaracteristicas_Dios');
+        Route::get('mostrarCaracteristicasHumano/{id_usuario}', 'mostrarCaracteristicasHumano');
+    });
+
+    //Alicia
+    Route::controller(PruebasController::class)->prefix('pruebas')->group(function (){
+        Route::post('asignarPrueba', 'asignarPrueba')->middleware('midPruebas');
+    });
+    Route::resource('pruebas', PruebasController::class)->middleware('midPruebas');
+
 });
 //Alejandro
 Route::controller(RegistroController::class)->group(function (){
@@ -34,13 +50,7 @@ Route::controller(RegistroController::class)->group(function (){
     Route::post('cerrarSesion','cerrarSesion');
 });
 
-Route::controller(CaracteristicasController::class)->group(function (){
-    Route::get('mostrarCaracteristicas_Dios/{id_usuario}', 'mostrarCaracteristicas_Dios');
-    Route::get('mostrarCaracteristicasHumano/{id_usuario}', 'mostrarCaracteristicasHumano');
-});
-
 // Route::controller(CaracteristicasController::class)->group(function (){
 //     Route::post('asignarCaracteristicas/{id}', 'asignarCaracteristicas');
 // });
-//Alicia
-Route::resource('pruebas', PruebasController::class)->middleware('auth:sanctum', 'midCrearPruebas');
+

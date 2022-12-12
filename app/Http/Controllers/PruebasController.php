@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Exception;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use App\Http\Resources\PruebaResource;
 use App\Http\Resources\PruebaPuntualResource;
 use App\Http\Resources\PruebaRespuestaLibreResource;
 use App\Models\Validar;
+use App\Models\PruebaHumano;
 use App\Models\Caracteristica;
 use App\Models\Pruebas\Prueba;
 use App\Models\Pruebas\PruebaPuntual;
@@ -147,6 +149,20 @@ class PruebasController extends Controller
             return response()->json(['estado' => 'ok', 'datos' => $prueba], 200);
         } catch (Exception $e) {
             return response()->json(['estado' => 'error', 'datos' => $prueba], 400);
+        }
+    }
+
+
+    function asignarPrueba(Request $request) {
+        $pruebaHumano = new PruebaHumano();
+        $pruebaHumano->id_prueba = $request->idPrueba;
+        $pruebaHumano->id_humano = $request->idHumano;
+
+        try {
+            $pruebaHumano->save();
+            return response()->json(['estado' => 'ok'], 200);
+        } catch (Exception $e) {
+            return response()->json(['estado' => 'error'], 400);
         }
     }
 }
