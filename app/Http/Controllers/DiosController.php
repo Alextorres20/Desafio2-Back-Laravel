@@ -13,6 +13,7 @@ use App\Models\Rol;
 use App\Models\RolUsuario;
 use App\Models\User;
 use App\Models\Parametro;
+use App\Models\PruebaHumano;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Faker;
@@ -300,4 +301,15 @@ class DiosController extends Controller
             ->where('donde_murio', 'Vivo')->get();
         return response()->json($humanos);
     }
+
+
+    //Alicia
+    public function obtenerHumanosPrueba($idPrueba) {
+        $idsHumanos = PruebaHumano::where('id_prueba', $idPrueba)->get('id_humano');
+        $humanos = Humano::with('user')
+            ->whereIn('id_usuario', $idsHumanos)
+            ->get();
+        return response()->json($humanos);
+    }
+
 }

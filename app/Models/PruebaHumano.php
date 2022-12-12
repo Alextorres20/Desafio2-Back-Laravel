@@ -13,4 +13,5 @@ class PruebaHumano extends Model
     protected $primaryKey = ['id_prueba', 'id_humano'];
     public $incrementing = false;
     public $timestamps = false;
+
 }

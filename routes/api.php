@@ -27,6 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('matarUsuario', 'matarUsuario')->middleware('midMatarUsuarios');
         Route::put('matarUsuariosAlAzar', 'matarUsuariosAlAzar')->middleware('midMatarUsuarios');
         Route::get('obtenerHumanosDios', 'obtenerHumanosDios')->middleware('midDios');
+        Route::get('obtenerHumanosPrueba/{idPrueba}', 'obtenerHumanosPrueba')->middleware('midDios');
     });
 
     //Alejandro y Alicia
