@@ -19,13 +19,16 @@ use App\Http\Controllers\PruebasController;
 
 
 Route::middleware('auth:sanctum')->group(function () {
-    // Alejandro
+    // Alejandro y Alicia
     Route::controller(DiosController::class)->group(function (){
         Route::post('crearUsuarios', 'crearUsuarios')->middleware('midDios');
         Route::get('mostrarHumanosVivos', 'mostrarHumanosVivos')->middleware('midDios');
         Route::get('mostrarHumanoVivo/{id}', 'mostrarHumanoVivo')->middleware('midDios');
-        Route::put('matarUsuario', 'matarUsuario')->middleware('midMatarUsuarios');
-        Route::put('matarUsuariosAlAzar', 'matarUsuariosAlAzar')->middleware('midMatarUsuarios');
+        Route::put('matarUsuario', 'matarUsuario')->middleware('midHades');
+        Route::put('matarUsuariosAlAzar', 'matarUsuariosAlAzar')->middleware('midHades');
+        Route::get('mostrarMuertos', 'mostrarMuertos')->middleware('midHades');
+        Route::get('mostrarMuertosAscendiente', 'mostrarMuertosAscendiente')->middleware('midHades');
+        Route::get('mostrarMuertosDescendiente', 'mostrarMuertosDescendiente')->middleware('midHades');
         Route::get('obtenerHumanosDios', 'obtenerHumanosDios')->middleware('midDios');
         Route::get('obtenerHumanosPrueba/{idPrueba}', 'obtenerHumanosPrueba')->middleware('midDios');
     });
@@ -34,6 +37,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::controller(CaracteristicasController::class)->group(function (){
         Route::get('mostrarCaracteristicas_Dios/{id_usuario}', 'mostrarCaracteristicas_Dios');
         Route::get('mostrarCaracteristicasHumano/{id_usuario}', 'mostrarCaracteristicasHumano');
+        /* Route::post('asignarCaracteristicas/{id}', 'asignarCaracteristicas'); */
     });
 
     //Alicia
@@ -50,8 +54,4 @@ Route::controller(RegistroController::class)->group(function (){
     Route::post('iniciarSesion','iniciarSesion');
     Route::post('cerrarSesion','cerrarSesion');
 });
-
-// Route::controller(CaracteristicasController::class)->group(function (){
-//     Route::post('asignarCaracteristicas/{id}', 'asignarCaracteristicas');
-// });
 
