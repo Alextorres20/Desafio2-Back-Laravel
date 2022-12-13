@@ -17,10 +17,11 @@ class CreatePruebaOraculoEleccionTable extends Migration
             $table->unsignedBigInteger('id');
             $table->foreign('id')->references('id')->on('pruebas_oraculo')->onDelete('cascade');
             $table->primary('id');
-            $table->unsignedBigInteger('caracteristica_asociada');
-            $table->foreign('caracteristica_asociada')->references('id')->on('caracteristicas')->onDelete('cascade');
+            $table->unsignedBigInteger('id_caracteristica');
+            $table->foreign('id_caracteristica')->references('id')->on('caracteristicas')->onDelete('cascade');
             $table->integer('valor');
-            $table->string('respuesta');
+            $table->string('respuesta_correcta');
+            $table->string('respuesta_incorrecta');
         });
     }
 

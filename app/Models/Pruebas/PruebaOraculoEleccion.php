@@ -14,6 +14,14 @@ class PruebaOraculoEleccion extends Prueba
     public $incrementing = false;
     public $timestamps = false;
 
+    protected $fillable = [
+        'id',
+        'id_caracteristica',
+        'valor',
+        'respuesta_correcta',
+        'respuesta_incorrecta'
+    ];
+
     public function prueba()
     {
         return $this->hasOne(Prueba::class, 'id', 'id');

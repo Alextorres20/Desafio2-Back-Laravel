@@ -40,7 +40,6 @@ class Validar extends Model
 
     static function validarPruebaRespuestaLibre($input) {
         $messages = [
-            'digits_between' => 'Debe ser un número entre 1 y 100',
             'required' => 'Campo requerido',
             'max' => 'No puede superar los :max caracteres',
         ];
@@ -54,7 +53,6 @@ class Validar extends Model
 
     static function validarPruebaValoracion($input) {
         $messages = [
-            'digits_between' => 'Debe ser un número entre 1 y 100',
             'required' => 'Campo requerido',
             'in' => 'El campo tipo debe estar entre las siguientes opciones: Audacia, Nobleza, Sabiduría, Maldad y Virtud',
         ];
@@ -65,31 +63,21 @@ class Validar extends Model
         ], $messages);
     }
 
-/*
+
     static function validarPruebaEleccion($input) {
         $messages = [
-            'digits_between' => 'Debe ser un número entre 1 y 100',
-            'required' => 'Campo requerido'
+            'digits_between' => 'Debe ser un número entre 1 y 5',
+            'required' => 'Campo requerido',
+            'max' => 'No puede superar los :max caracteres',
+            'in' => 'El campo tipo debe estar entre las siguientes opciones: Audacia, Nobleza, Sabiduría, Maldad y Virtud'
         ];
 
         return Validator::make($input, [
-            'cantidad_destino' => 'required | digits_between:1,100',
-            'descripcion' => 'max:255',
-            'dificultad' => 'required | digits_between:1,100'
+            'pregunta' => 'required | max:255',
+            'respuesta_correcta' => 'required | max:255',
+            'respuesta_incorrecta' => 'required | max:255',
+            'atributo' => 'required | in:Audacia,Nobleza,Sabiduría,Maldad,Virtud',
+            'valor_atributo' => 'required | digits_between:1,5',
         ], $messages);
     }
-
-
-    static function validarPruebaValoracion($input) {
-        $messages = [
-            'digits_between' => 'Debe ser un número entre 1 y 100',
-            'required' => 'Campo requerido'
-        ];
-
-        return Validator::make($input, [
-            'cantidad_destino' => 'required | digits_between:1,100',
-            'descripcion' => 'max:255',
-            'dificultad' => 'required | digits_between:1,100'
-        ], $messages);
-    } */
 }

@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Resources\PruebaResource;
 use App\Http\Resources\PruebaPuntualResource;
+use App\Http\Resources\PruebaEleccionResource;
 use App\Http\Resources\PruebaValoracionResource;
 use App\Http\Resources\PruebaRespuestaLibreResource;
 use App\Models\Validar;
@@ -16,8 +17,8 @@ use App\Models\Pruebas\Prueba;
 use App\Models\Pruebas\PruebaPuntual;
 use App\Models\Pruebas\PruebaOraculo;
 use App\Models\Pruebas\PruebaOraculoLibre;
+use App\Models\Pruebas\PruebaOraculoEleccion;
 use App\Models\Pruebas\PruebaOraculoValoracion;
-
 
 class PruebasController extends Controller
 {
@@ -26,7 +27,8 @@ class PruebasController extends Controller
         $puntuales = json_decode(json_encode(PruebaPuntualResource::collection(PruebaPuntual::all())), true);
         $respLibre = json_decode(json_encode(PruebaRespuestaLibreResource::collection(PruebaOraculoLibre::all())), true);
         $valoracion = json_decode(json_encode(PruebaValoracionResource::collection(PruebaOraculoValoracion::all())), true);
-        $datos = array_merge($puntuales, $respLibre, $valoracion);
+        $eleccion = json_decode(json_encode(PruebaEleccionResource::collection(PruebaOraculoEleccion::all())), true);
+        $datos = array_merge($puntuales, $respLibre, $valoracion, $eleccion);
 
         return response()->json([ 'estado' => 'ok', 'respuesta' => $datos ], 200);
     }
@@ -70,7 +72,11 @@ class PruebasController extends Controller
                     break;
 
                 case 'eleccion':
-                    $respuesta = self::insertarEleccion($request, $pruebaGeneral);
+                    $validator = Validar::validarPruebaEleccion($request->all());
+                    if (!$validator->fails()) {
+                        $oraculo = self::insertarOraculo($request, $pruebaGeneral);
+                        $respuesta = self::insertarEleccion($request, $oraculo);
+                    }
                     break;
             }
         }
@@ -130,12 +136,19 @@ class PruebasController extends Controller
     }
 
 
-    private function insertarEleccion($request) {
-        return response()->json(['datos' => $request], 200);
+    private function insertarEleccion($request, $prueba) {
+        if ($prueba) {
+            $datos = [
+                'id' => $prueba->id,
+                'pregunta' => $request->pregunta,
+                'respuesta_correcta' => $request->respuesta_correcta,
+                'respuesta_incorrecta' => $request->respuesta_incorrecta,
+                'valor' => $request->valor_atributo,
+                'id_caracteristica' => Caracteristica::where('nombre', $request->atributo)->value('id')
+            ];
+        }
+        return new PruebaEleccionResource(PruebaOraculoEleccion::create($datos));
     }
-
-
-
 
 
     private function insertarPuntual($request, $prueba) {
