@@ -13,4 +13,8 @@ class CaracteristicaUsuario extends Model
     protected $primaryKey = ['id_usuario', 'id_caracteristica'];
     public $incrementing = false;
 
+
+    public function caracteristica() {
+        return $this->hasOne(Caracteristica::class, 'id', 'id_caracteristica');
+    }
 }

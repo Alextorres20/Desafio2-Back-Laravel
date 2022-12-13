@@ -13,14 +13,14 @@ use App\Models\Rol;
 use App\Models\RolUsuario;
 use App\Models\User;
 use App\Models\Parametro;
+use App\Models\PruebaHumano;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Faker;
 
 class DiosController extends Controller
 {
-    // Todo Alejandro
-
+    // Alejandro
     public function asignarProteccion($id_usuario){
         $zeus_ID = User::where('name', 'Zeus')->first()->id;
         $poseidon_ID = User::where('name', 'Poseidon')->first()->id;
@@ -192,6 +192,7 @@ class DiosController extends Controller
 
     }
 
+    // Alejandro
     public function crearUsuarios(Request $req){
         $auth = Auth::user();
         $faker = Faker\Factory::create();
@@ -232,22 +233,25 @@ class DiosController extends Controller
         'Usuarios' => $usuarios_creados],201);
     }
 
+    // Alejandro
     public function mostrarHumanoVivo($id){
         $humanoVivo = Humano::where('id_usuario', $id)->where('donde_murio', 'Vivo')->first();
         return response()->json($humanoVivo);
     }
 
-
+    // Alejandro
     public function mostrarHumanosVivos(){
         $usuariosVivos = Humano::where('donde_murio', 'Vivo')->get();
         return response()->json($usuariosVivos);
     }
 
+    // Alejandro
     public function obtenerHumanosVivos(){
         $usuariosVivos = Humano::where('donde_murio', 'Vivo')->get();
         return $usuariosVivos;
     }
 
+    // Alejandro
     public function matarUsuario(Request $req){
 
         $humano = Humano::where('id_usuario', $req->get('id_usuario'))->where('donde_murio', 'Vivo')->first();
@@ -264,10 +268,9 @@ class DiosController extends Controller
         }
 
         return response()->json(['mens' => $mensaje], 201);
-
-
     }
 
+    // Alejandro
     public function matarUsuariosAlAzar(){
         $humanosVivos = self::obtenerHumanosVivos();
         $aleatorio = rand(1, count($humanosVivos));
@@ -309,4 +312,25 @@ class DiosController extends Controller
         $humanosMuertos = Humano::orderBy('fecha_de_muerte', 'desc')->where('donde_murio', '!=' , 'Vivo')->get();
         return response()->json($humanosMuertos);
     }
+
+
+    //Alicia
+    public function obtenerHumanosDios(Request $request) {
+        $idsHumanos = DiosHumano::where('id_dios', $request->user()->id)->get('id_humano');
+        $humanos = Humano::with('user')
+            ->whereIn('id_usuario', $idsHumanos)
+            ->where('donde_murio', 'Vivo')->get();
+        return response()->json($humanos);
+    }
+
+
+    //Alicia
+    public function obtenerHumanosPrueba($idPrueba) {
+        $idsHumanos = PruebaHumano::where('id_prueba', $idPrueba)->get('id_humano');
+        $humanos = Humano::with('user')
+            ->whereIn('id_usuario', $idsHumanos)
+            ->get();
+        return response()->json($humanos);
+    }
+
 }

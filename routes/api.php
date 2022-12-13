@@ -17,33 +17,41 @@ use App\Http\Controllers\PruebasController;
 |
 */
 
+
 Route::middleware('auth:sanctum')->group(function () {
-    // Alejandro
-    Route::post('crearUsuarios',[DiosController::class, 'crearUsuarios'])->middleware('midDios');
-    Route::get('mostrarHumanosVivos',[DiosController::class, 'mostrarHumanosVivos'])->middleware('midDios');
-    Route::get('mostrarHumanoVivo/{id}',[DiosController::class, 'mostrarHumanoVivo'])->middleware('midDios');
-    Route::put('matarUsuario',[DiosController::class, 'matarUsuario'])->middleware('midHades');
-    Route::put('matarUsuariosAlAzar',[DiosController::class, 'matarUsuariosAlAzar'])->middleware('midHades');
-    Route::get('mostrarMuertos',[DiosController::class, 'mostrarMuertos'])->middleware('midHades');
-    Route::get('mostrarMuertosAscendiente', [DiosController::class, 'mostrarMuertosAscendiente'])->middleware('midHades');
-    Route::get('mostrarMuertosDescendiente', [DiosController::class, 'mostrarMuertosDescendiente'])->middleware('midHades');
+    // Alejandro y Alicia
+    Route::controller(DiosController::class)->group(function (){
+        Route::post('crearUsuarios', 'crearUsuarios')->middleware('midDios');
+        Route::get('mostrarHumanosVivos', 'mostrarHumanosVivos')->middleware('midDios');
+        Route::get('mostrarHumanoVivo/{id}', 'mostrarHumanoVivo')->middleware('midDios');
+        Route::put('matarUsuario', 'matarUsuario')->middleware('midHades');
+        Route::put('matarUsuariosAlAzar', 'matarUsuariosAlAzar')->middleware('midHades');
+        Route::get('mostrarMuertos', 'mostrarMuertos')->middleware('midHades');
+        Route::get('mostrarMuertosAscendiente', 'mostrarMuertosAscendiente')->middleware('midHades');
+        Route::get('mostrarMuertosDescendiente', 'mostrarMuertosDescendiente')->middleware('midHades');
+        Route::get('obtenerHumanosDios', 'obtenerHumanosDios')->middleware('midDios');
+        Route::get('obtenerHumanosPrueba/{idPrueba}', 'obtenerHumanosPrueba')->middleware('midDios');
+    });
+
+    //Alejandro y Alicia
+    Route::controller(CaracteristicasController::class)->group(function (){
+        Route::get('mostrarCaracteristicas_Dios/{id_usuario}', 'mostrarCaracteristicas_Dios');
+        Route::get('mostrarCaracteristicasHumano/{id_usuario}', 'mostrarCaracteristicasHumano');
+        /* Route::post('asignarCaracteristicas/{id}', 'asignarCaracteristicas'); */
+    });
+
+    //Alicia
+    Route::controller(PruebasController::class)->prefix('pruebas')->group(function (){
+        Route::post('asignarPrueba', 'asignarPrueba')->middleware('midPruebas');
+    });
+    Route::resource('pruebas', PruebasController::class)->middleware('midPruebas');
 
 });
 //Alejandro
 Route::controller(RegistroController::class)->group(function (){
     Route::post('registrar', 'registrar');
     Route::get('verificar/{id}', 'verificar');
-
     Route::post('iniciarSesion','iniciarSesion');
     Route::post('cerrarSesion','cerrarSesion');
 });
-//Alejandro
-Route::controller(CaracteristicasController::class)->group(function (){
-    Route::get('mostrarCaracteristicas_Dios/{id_usuario}', 'mostrarCaracteristicas_Dios');
-});
 
-// Route::controller(CaracteristicasController::class)->group(function (){
-//     Route::post('asignarCaracteristicas/{id}', 'asignarCaracteristicas');
-// });
-//Alicia
-Route::resource('pruebas', PruebasController::class)->middleware('auth:sanctum', 'midCrearPruebas');

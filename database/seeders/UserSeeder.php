@@ -4,8 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class HumanoSeeder extends Seeder
-{//Alejandro
+class UserSeeder extends Seeder
+{
     /**
      * Run the database seeds.
      *
@@ -13,6 +13,6 @@ class HumanoSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Humano::factory(20)->create();
+        \App\Models\User::factory(20)->create();
     }
 }

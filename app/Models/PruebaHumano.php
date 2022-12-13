@@ -10,4 +10,8 @@ class PruebaHumano extends Model
     use HasFactory;
 
     protected $table = 'pruebas_humanos';
+    protected $primaryKey = ['id_prueba', 'id_humano'];
+    public $incrementing = false;
+    public $timestamps = false;
+
 }
