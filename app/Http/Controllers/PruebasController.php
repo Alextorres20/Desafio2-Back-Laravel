@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Resources\PruebaResource;
 use App\Http\Resources\PruebaPuntualResource;
+use App\Http\Resources\PruebaValoracionResource;
 use App\Http\Resources\PruebaRespuestaLibreResource;
 use App\Models\Validar;
 use App\Models\PruebaHumano;
@@ -15,6 +16,7 @@ use App\Models\Pruebas\Prueba;
 use App\Models\Pruebas\PruebaPuntual;
 use App\Models\Pruebas\PruebaOraculo;
 use App\Models\Pruebas\PruebaOraculoLibre;
+use App\Models\Pruebas\PruebaOraculoValoracion;
 
 
 class PruebasController extends Controller
@@ -23,7 +25,8 @@ class PruebasController extends Controller
     function index(Request $request) {
         $puntuales = json_decode(json_encode(PruebaPuntualResource::collection(PruebaPuntual::all())), true);
         $respLibre = json_decode(json_encode(PruebaRespuestaLibreResource::collection(PruebaOraculoLibre::all())), true);
-        $datos = array_merge($puntuales, $respLibre);
+        $valoracion = json_decode(json_encode(PruebaValoracionResource::collection(PruebaOraculoValoracion::all())), true);
+        $datos = array_merge($puntuales, $respLibre, $valoracion);
 
         return response()->json([ 'estado' => 'ok', 'respuesta' => $datos ], 200);
     }
@@ -45,34 +48,33 @@ class PruebasController extends Controller
             switch ($request->tipo) {
                 case 'puntual':
                     $validator = Validar::validarPruebaPuntual($request->all());
-                    if ($validator->fails()) {
-                        Prueba::destroy($pruebaGeneral->id);
-                        return response()->json(['estado' => 'error', $validator->errors()], 400);
-                    } else {
+                    if (!$validator->fails()) {
                         $respuesta = self::insertarPuntual($request, $pruebaGeneral);
                     }
                     break;
 
                 case 'respuesta-libre':
                     $validator = Validar::validarPruebaRespuestaLibre($request->all());
-                    if ($validator->fails()) {
-                        Prueba::destroy($pruebaGeneral->id);
-                        return response()->json(['estado' => 'error', $validator->errors()], 400);
-                    } else {
+                    if (!$validator->fails()) {
                         $oraculo = self::insertarOraculo($request, $pruebaGeneral);
                         $respuesta = self::insertarRespuestaLibre($request, $oraculo);
+                    }
+                    break;
+
+                case 'valoracion':
+                    $validator = Validar::validarPruebaValoracion($request->all());
+                    if (!$validator->fails()) {
+                        $oraculo = self::insertarOraculo($request, $pruebaGeneral);
+                        $respuesta = self::insertarValoracion($request, $oraculo);
                     }
                     break;
 
                 case 'eleccion':
                     $respuesta = self::insertarEleccion($request, $pruebaGeneral);
                     break;
-
-                case 'valoracion':
-                    $respuesta = self::insertarValoracion($request, $pruebaGeneral);
-                    break;
             }
         }
+
         if ($respuesta) {
             return response()->json(['estado' => 'ok', 'respuesta' => $respuesta], 200);
         } else {
@@ -116,14 +118,24 @@ class PruebasController extends Controller
     }
 
 
+    private function insertarValoracion($request, $prueba) {
+        if ($prueba) {
+            $datos = [
+                'id' => $prueba->id,
+                'pregunta' => $request->pregunta,
+                'id_caracteristica' => Caracteristica::where('nombre', $request->atributo)->value('id')
+            ];
+        }
+        return new PruebaValoracionResource(PruebaOraculoValoracion::create($datos));
+    }
+
+
     private function insertarEleccion($request) {
         return response()->json(['datos' => $request], 200);
     }
 
 
-    private function insertarValoracion($request) {
-        return response()->json(['datos' => $request], 200);
-    }
+
 
 
     private function insertarPuntual($request, $prueba) {

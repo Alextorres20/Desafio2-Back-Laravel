@@ -13,4 +13,14 @@ class PruebaOraculoEleccion extends Prueba
     protected $table = 'pruebas_oraculo_eleccion';
     public $incrementing = false;
     public $timestamps = false;
+
+    public function prueba()
+    {
+        return $this->hasOne(Prueba::class, 'id', 'id');
+    }
+
+    public function oraculo()
+    {
+        return $this->hasOne(PruebaOraculo::class, 'id', 'id');
+    }
 }
