@@ -25,16 +25,24 @@ class RegistroController extends Controller
     // Alejandro y Alicia
     public function iniciarSesion(Request $request)
     {
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $auth = Auth::user();
             $perfiles = Rol::whereIn('id', RolUsuario::where('id_usuario', $auth->id)->get('id_rol'))->get('nombre');
+            $caracteristicas = CaracteristicasController::mostrarCaracteristicasUsuario($auth->id);
 
             $abilities = [];
             foreach ($perfiles as $value) {
                 array_push($abilities, strtolower($value->nombre));
             }
+
             $success['token'] =  $auth->createToken('access_token', $abilities)->plainTextToken;
             $success['name'] =  $auth->name;
+            $success['roles'] =  $abilities;
+            $success['atributos'] =  $caracteristicas->original;
+            (in_array('dios', $abilities)) ? $success['destino'] = null : $success['destino'] = $auth->humano->destino;
+            (in_array('dios', $abilities))
+                ? $success['dios'] = null
+                : $success['dios'] = User::where('id', DiosHumano::where('id_humano', $auth->id)->value('id_dios'))->value('name');
 
             return response()->json(["success"=>true,"data"=>$success, "message" => "Sesión iniciada"],200);
         }

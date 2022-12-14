@@ -36,7 +36,7 @@ Route::middleware('auth:sanctum')->group(function () {
     //Alejandro y Alicia
     Route::controller(CaracteristicasController::class)->group(function (){
         Route::get('mostrarCaracteristicas_Dios/{id_usuario}', 'mostrarCaracteristicas_Dios');
-        Route::get('mostrarCaracteristicasHumano/{id_usuario}', 'mostrarCaracteristicasHumano');
+        Route::get('mostrarCaracteristicasUsuario/{id_usuario}', 'mostrarCaracteristicasUsuario');
         /* Route::post('asignarCaracteristicas/{id}', 'asignarCaracteristicas'); */
     });
 

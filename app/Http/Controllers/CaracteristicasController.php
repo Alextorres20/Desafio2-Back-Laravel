@@ -35,9 +35,13 @@ class CaracteristicasController extends Controller
     }
 
 
-    public function mostrarCaracteristicasHumano ($id_usuario){
-        $caracteristicas = CaracteristicaUsuario::with('caracteristica')->where('id_usuario', $id_usuario)->get();
-        return response()->json(['caracteristicas' => $caracteristicas], 200);
+    public function mostrarCaracteristicasUsuario ($id_usuario){
+        $datos = CaracteristicaUsuario::with('caracteristica')->where('id_usuario', $id_usuario)->get();
+        $caracteristicas = [];
+        foreach ($datos as $value) {
+            array_push($caracteristicas, ['nombre' => $value->caracteristica->nombre, 'valor' => $value->valor]);
+        }
+        return response()->json($caracteristicas, 200);
     }
 
 }

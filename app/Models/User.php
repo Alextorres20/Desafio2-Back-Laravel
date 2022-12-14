@@ -44,6 +44,6 @@ class User extends Authenticatable
     ];
 
     public function humano() {
-        return $this->hasOne(Humano::class);
+        return $this->hasOne(Humano::class, 'id_usuario', 'id');
     }
 }
