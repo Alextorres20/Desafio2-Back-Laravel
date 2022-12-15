@@ -13,4 +13,19 @@ class PruebaOraculoValoracion extends Prueba
     protected $table = 'pruebas_oraculo_valoracion';
     public $incrementing = false;
     public $timestamps = false;
+
+    protected $fillable = [
+        'id',
+        'id_caracteristica'
+    ];
+
+    public function prueba()
+    {
+        return $this->hasOne(Prueba::class, 'id', 'id');
+    }
+
+    public function oraculo()
+    {
+        return $this->hasOne(PruebaOraculo::class, 'id', 'id');
+    }
 }

@@ -16,6 +16,7 @@ class CreatePruebaOraculoTable extends Migration
         Schema::create('pruebas_oraculo', function (Blueprint $table) {
             $table->unsignedBigInteger('id');
             $table->foreign('id')->references('id')->on('pruebas')->onDelete('cascade');
+            $table->primary('id');
             $table->string('pregunta');
         });
     }

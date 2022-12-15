@@ -16,6 +16,7 @@ class CreatePruebaOraculoLibreTable extends Migration
         Schema::create('pruebas_oraculo_libre', function (Blueprint $table) {
             $table->unsignedBigInteger('id');
             $table->foreign('id')->references('id')->on('pruebas_oraculo')->onDelete('cascade');
+            $table->primary('id');
             $table->string('palabras_clave');
             $table->integer('porcentaje');
         });
