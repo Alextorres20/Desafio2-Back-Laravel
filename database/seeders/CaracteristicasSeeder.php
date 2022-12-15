@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 
 class CaracteristicasSeeder extends Seeder
-{
+{//Alejandro
     /**
      * Run the database seeds.
      *
@@ -14,5 +14,6 @@ class CaracteristicasSeeder extends Seeder
     public function run()
     {
         //
+        \App\Models\Caracteristica::factory(5)->create();
     }
 }

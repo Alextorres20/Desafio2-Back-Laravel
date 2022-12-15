@@ -12,14 +12,13 @@ class CreatePruebasHumanosTable extends Migration
      * @return void
      */
     public function up()
-    {
+    {//Alicia y Alejandro
         Schema::create('pruebas_humanos', function (Blueprint $table) {
-            $table->id();
             $table->unsignedBigInteger('id_prueba');
             $table->foreign('id_prueba')->references('id')->on('pruebas')->onDelete('cascade');
             $table->unsignedBigInteger('id_humano');
             $table->foreign('id_humano')->references('id')->on('users')->onDelete('cascade');
-            $table->timestamps();
+            $table->primary(['id_prueba', 'id_humano']);
         });
     }
 

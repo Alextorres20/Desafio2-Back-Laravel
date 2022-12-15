@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PruebaOraculoLibre extends Model
-{
+class Rol extends Model
+{//Alicia y Alejandro
     use HasFactory;
-    protected $table = 'prueba_oraculo_libre';
+
+    protected $table = 'roles';
 }

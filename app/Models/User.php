@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Humano;
 
 class User extends Authenticatable
-{
+{//Alicia y Alejandro
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -41,4 +42,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function humano() {
+        return $this->hasOne(Humano::class, 'id_usuario', 'id');
+    }
 }

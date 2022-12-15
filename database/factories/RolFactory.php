@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\User;
-class PruebaFactory extends Factory
+
+class RolFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -15,8 +15,7 @@ class PruebaFactory extends Factory
     {
         return [
             //
-            'id_dios' => $this->faker->randomElement(User::get('id')),
-            'cantidad_destino' => rand(0,100)
+            'nombre' => $this->faker->name()
         ];
     }
 }

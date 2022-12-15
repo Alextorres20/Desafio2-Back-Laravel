@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\PruebaOraculo;
-class PruebaOraculoValoracionFactory extends Factory
+use App\Models\User;
+class ParametroFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -12,11 +12,12 @@ class PruebaOraculoValoracionFactory extends Factory
      * @return array
      */
     public function definition()
-    {
+    {//Alejandro
         return [
             //
-            'id_prueba_oraculo' => $this->faker->randomElement(PruebaOraculo::get('id')),
-            'caracteristica_asociada' => rand(1,5)
+            'nombre' => $this->faker->name(),
+            'valor' => rand(0,100),
+            'modificado_por' => $this->faker->randomElement(User::get('id'))
         ];
     }
 }

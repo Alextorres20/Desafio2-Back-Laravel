@@ -12,16 +12,15 @@ class CreatePruebaPuntualTable extends Migration
      * @return void
      */
     public function up()
-    {
-        Schema::create('prueba_puntual', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('id_prueba');
-            $table->foreign('id_prueba')->references('id')->on('pruebas')->onDelete('cascade');
-            $table->text('descripcion');
+    {//Alicia y Alejandro
+        Schema::create('pruebas_puntuales', function (Blueprint $table) {
+            $table->unsignedBigInteger('id');
+            $table->foreign('id')->references('id')->on('pruebas')->onDelete('cascade');
+            $table->primary('id');
+            $table->text('descripcion')->nullable();
             $table->unsignedBigInteger('id_caracteristica');
             $table->foreign('id_caracteristica')->references('id')->on('caracteristicas')->onDelete('cascade');
             $table->integer('dificultad');
-            $table->timestamps();
         });
     }
 

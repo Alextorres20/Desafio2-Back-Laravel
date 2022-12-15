@@ -12,14 +12,16 @@ class CreatePruebaOraculoEleccionTable extends Migration
      * @return void
      */
     public function up()
-    {
-        Schema::create('prueba_oraculo_eleccion', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('id_prueba_oraculo');
-            $table->foreign('id_prueba_oraculo')->references('id')->on('pruebas_oraculo')->onDelete('cascade');
-            $table->string('caracteristica_asociada');
+    {//Alicia y Alejandro
+        Schema::create('pruebas_oraculo_eleccion', function (Blueprint $table) {
+            $table->unsignedBigInteger('id');
+            $table->foreign('id')->references('id')->on('pruebas_oraculo')->onDelete('cascade');
+            $table->primary('id');
+            $table->unsignedBigInteger('id_caracteristica');
+            $table->foreign('id_caracteristica')->references('id')->on('caracteristicas')->onDelete('cascade');
             $table->integer('valor');
-            $table->timestamps();
+            $table->string('respuesta_correcta');
+            $table->string('respuesta_incorrecta');
         });
     }
 
