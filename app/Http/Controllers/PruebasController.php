@@ -30,14 +30,23 @@ class PruebasController extends Controller
         $eleccion = json_decode(json_encode(PruebaEleccionResource::collection(PruebaOraculoEleccion::all())), true);
         $datos = array_merge($puntuales, $respLibre, $valoracion, $eleccion);
 
-        return response()->json([ 'estado' => 'ok', 'respuesta' => $datos ], 200);
+        return response()->json([ 'estado' => 'ok', 'respuesta' => $datos], 200);
     }
 
+
+    function obtenerPruebasHumano($id) {
+        $puntuales = json_decode(json_encode(PruebaPuntualResource::collection(PruebaPuntual::whereIn('id', PruebaHumano::where('id_humano', $id)->get('id_prueba'))->get())), true);
+        $respLibre = json_decode(json_encode(PruebaRespuestaLibreResource::collection(PruebaOraculoLibre::whereIn('id', PruebaHumano::where('id_humano', $id)->get('id_prueba'))->get())), true);
+        $valoracion = json_decode(json_encode(PruebaValoracionResource::collection(PruebaOraculoValoracion::whereIn('id', PruebaHumano::where('id_humano', $id)->get('id_prueba'))->get())), true);
+        $eleccion = json_decode(json_encode(PruebaEleccionResource::collection(PruebaOraculoEleccion::whereIn('id', PruebaHumano::where('id_humano', $id)->get('id_prueba'))->get())), true);
+        $datos = array_merge($puntuales, $respLibre, $valoracion, $eleccion);
+
+        return response()->json([ 'estado' => 'ok', 'respuesta' => $datos], 200);
+    }
 
    /*  function show(Request $request) {
-
-    }
- */
+        }
+    */
 
     function store(Request $request) {
         $respuesta = null;
@@ -163,10 +172,8 @@ class PruebasController extends Controller
     }
 
     /* function update(User $user, Request $request) {
-        $user->update($request->all());
-        return new userResource($user);
-    }
- */
+        }
+    */
 
     function destroy(Prueba $prueba) {
         try {

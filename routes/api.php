@@ -43,6 +43,7 @@ Route::middleware('auth:sanctum')->group(function () {
     //Alicia
     Route::controller(PruebasController::class)->prefix('pruebas')->group(function (){
         Route::post('asignarPrueba', 'asignarPrueba')->middleware('midPruebas');
+        Route::get('obtenerPruebasHumano/{id}', 'obtenerPruebasHumano');
     });
     Route::resource('pruebas', PruebasController::class)->middleware('midPruebas');
 

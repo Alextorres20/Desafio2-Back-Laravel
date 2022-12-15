@@ -36,6 +36,7 @@ class RegistroController extends Controller
             }
 
             $success['token'] =  $auth->createToken('access_token', $abilities)->plainTextToken;
+            $success['id'] =  $auth->id;
             $success['name'] =  $auth->name;
             $success['roles'] =  $abilities;
             $success['atributos'] =  $caracteristicas->original;
