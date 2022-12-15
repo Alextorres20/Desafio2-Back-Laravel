@@ -20,7 +20,45 @@ use Faker;
 
 class DiosController extends Controller
 {
+
+
     // Alejandro
+
+    public function sacarPuntos($Caracteristica_Dios, $usuario){
+
+        $puntos_guardar = [];
+        $puntos_aux = 1;
+
+        for ($i=0; $i < 5; $i++) {
+            if($Caracteristica_Dios[$i]->valor == $usuario[$i]->valor){
+                array_push($puntos_guardar, $puntos_aux);
+            }
+            else{
+                if($Caracteristica_Dios[$i]->valor > $usuario[$i]->valor){
+                    for($u = $usuario[$i]->valor; $u < $Caracteristica_Dios[$i]->valor; $u++){
+                        $puntos_aux = $puntos_aux - 0.2;
+                        if($u + 1 == $Caracteristica_Dios[$i]->valor){
+                            array_push($puntos_guardar, $puntos_aux);
+                        }
+                    }
+                    $puntos_aux = 1;
+                }
+                else{
+                    for($u = $usuario[$i]->valor; $u > $Caracteristica_Dios[$i]->valor; $u--){
+                        $puntos_aux = $puntos_aux - 0.2;
+                        if($u - 1 == $Caracteristica_Dios[$i]->valor){
+                            array_push($puntos_guardar, $puntos_aux);
+                        }
+                    }
+                    $puntos_aux = 1;
+                }
+            }
+        }
+
+        return $puntos_guardar;
+
+    }
+
     public function asignarProteccion($id_usuario){
         $zeus_ID = User::where('name', 'Zeus')->first()->id;
         $poseidon_ID = User::where('name', 'Poseidon')->first()->id;
@@ -37,80 +75,11 @@ class DiosController extends Controller
         $puntos_Zeus = [];
         $puntos_Poseidon = [];
         $puntos_Hades = [];
-        $puntos_aux = 1;
 
-        for ($i=0; $i < 5; $i++) {
-            if($Zeus_Caracteristicas[$i]->valor == $usuario[$i]->valor){
-                array_push($puntos_Zeus, $puntos_aux);
-            }
-            else{
-                if($Zeus_Caracteristicas[$i]->valor > $usuario[$i]->valor){
-                    for($u = $usuario[$i]->valor; $u < $Zeus_Caracteristicas[$i]->valor; $u++){
-                        $puntos_aux = $puntos_aux - 0.2;
-                        if($u + 1 == $Zeus_Caracteristicas[$i]->valor){
-                            array_push($puntos_Zeus, $puntos_aux);
-                        }
-                    }
-                    $puntos_aux = 1;
-                }
-                else{
-                    for($u = $usuario[$i]->valor; $u > $Zeus_Caracteristicas[$i]->valor; $u--){
-                        $puntos_aux = $puntos_aux - 0.2;
-                        if($u - 1 == $Zeus_Caracteristicas[$i]->valor){
-                            array_push($puntos_Zeus, $puntos_aux);
-                        }
-                    }
-                    $puntos_aux = 1;
-                }
-            }
-            if($Poseidon_Caracteristicas[$i]->valor == $usuario[$i]->valor){
-                array_push($puntos_Poseidon, $puntos_aux);
-            }
-            else{
-                if($Poseidon_Caracteristicas[$i]->valor > $usuario[$i]->valor){
-                    for($u = $usuario[$i]->valor; $u < $Poseidon_Caracteristicas[$i]->valor; $u++){
-                        $puntos_aux = $puntos_aux - 0.2;
-                        if($u + 1 == $Poseidon_Caracteristicas[$i]->valor){
-                            array_push($puntos_Poseidon, $puntos_aux);
-                        }
-                    }
-                    $puntos_aux = 1;
-                }
-                else{
-                    for($u = $usuario[$i]->valor; $u > $Poseidon_Caracteristicas[$i]->valor; $u--){
-                        $puntos_aux = $puntos_aux - 0.2;
-                        if($u - 1 == $Poseidon_Caracteristicas[$i]->valor){
-                            array_push($puntos_Poseidon, $puntos_aux);
-                        }
-                    }
-                    $puntos_aux = 1;
-                }
-            }
-            if($Hades_Caracteristicas[$i]->valor == $usuario[$i]->valor){
-                array_push($puntos_Hades, $puntos_aux);
-            }
-            else{
-                if($Hades_Caracteristicas[$i]->valor > $usuario[$i]->valor){
-                    for($u = $usuario[$i]->valor; $u < $Hades_Caracteristicas[$i]->valor; $u++){
-                        $puntos_aux = $puntos_aux - 0.2;
-                        if($u + 1 == $Hades_Caracteristicas[$i]->valor){
-                            array_push($puntos_Hades, $puntos_aux);
-                        }
-                    }
-                    $puntos_aux = 1;
-                }
-                else{
-                    for($u = $usuario[$i]->valor; $u > $Hades_Caracteristicas[$i]->valor; $u--){
-                        $puntos_aux = $puntos_aux - 0.2;
-                        if($u - 1 == $Hades_Caracteristicas[$i]->valor){
-                            array_push($puntos_Hades, $puntos_aux);
-                        }
+        $puntos_Zeus = self::sacarPuntos($Zeus_Caracteristicas, $usuario);
+        $puntos_Poseidon = self::sacarPuntos($Poseidon_Caracteristicas, $usuario);
+        $puntos_Hades = self::sacarPuntos($Hades_Caracteristicas, $usuario);
 
-                    }
-                    $puntos_aux = 1;
-                }
-            }
-        }
         $zeusTotal = 0;
         $poseidonTotal = 0;
         $hadesTotal = 0;

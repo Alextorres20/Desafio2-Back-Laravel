@@ -14,5 +14,6 @@ class CaracteristicasSeeder extends Seeder
     public function run()
     {
         //
+        \App\Models\Caracteristica::factory(5)->create();
     }
 }

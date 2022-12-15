@@ -15,8 +15,7 @@ class PruebaOraculoFactory extends Factory
     {
         return [
             //
-            'id_prueba' => $this->faker->randomElement(Prueba::get('id')),
-            'tipo' => $this->faker->randomElement(['Respuesta libre', 'Valoracion', 'Eleccion']),
+            'id' => $this->faker->randomElement(Prueba::get('id')),
             'pregunta' => $this->faker->text(rand(5,10))
         ];
     }

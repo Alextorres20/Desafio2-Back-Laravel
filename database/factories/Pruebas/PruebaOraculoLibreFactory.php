@@ -15,7 +15,7 @@ class PruebaOraculoLibreFactory extends Factory
     {
         return [
             //
-            'id_prueba_oraculo' => $this->faker->randomElement(PruebaOraculo::get('id')),
+            'id' => $this->faker->randomElement(PruebaOraculo::get('id')),
             'palabras_clave' => $this->faker->text(rand(5,20)),
             'porcentaje' => rand(10,100)
 
