@@ -16,7 +16,7 @@ class PruebaPuntualFactory extends Factory
     {
         return [
             //
-            'id_prueba' => $this->faker->randomElement(Prueba::get('id')),
+            'id' => $this->faker->randomElement(Prueba::get('id')),
             'descripcion' => $this->faker->text(rand(10,100)),
             'id_caracteristica' => $this->faker->randomElement(Caracteristica::get('id')),
             'dificultad' => rand(0, 100)

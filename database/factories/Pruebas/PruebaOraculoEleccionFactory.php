@@ -16,10 +16,11 @@ class PruebaOraculoEleccionFactory extends Factory
     {
         return [
             //
-            'id_prueba_oraculo' => $this->faker->randomElement(PruebaOraculo::get('id')),
-            'caracteristica_asociada' => $this->faker->randomElement(Caracteristica::get('id')),
+            'id' => $this->faker->randomElement(PruebaOraculo::get('id')),
+            'id_caracteristica' => $this->faker->randomElement(Caracteristica::get('id')),
             'valor' => rand(1,5),
-            'respuesta' => $this->faker->text(rand(5,10))
+            'respuesta_correcta' => $this->faker->text(rand(5,10)),
+            'respuesta_incorrecta' => $this->faker->text(rand(5,10))
 
         ];
     }

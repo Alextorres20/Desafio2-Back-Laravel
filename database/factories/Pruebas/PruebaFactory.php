@@ -16,7 +16,8 @@ class PruebaFactory extends Factory
         return [
             //
             'id_dios' => $this->faker->randomElement(User::get('id')),
-            'cantidad_destino' => rand(0,100)
+            'cantidad_destino' => rand(0,100),
+            'tipo' => $this->faker->randomElement(['puntual', 'respuesta-libre', 'valoracion', 'eleccion'])
         ];
     }
 }

@@ -13,6 +13,6 @@ class HumanoSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Humano::factory(20)->create();
+        \App\Models\Humano::factory(2)->create();
     }
 }
