@@ -35,7 +35,7 @@ class CaracteristicasController extends Controller
     }
 
 
-    public function mostrarCaracteristicasUsuario ($id_usuario){
+    public static function mostrarCaracteristicasUsuario ($id_usuario){
         $datos = CaracteristicaUsuario::with('caracteristica')->where('id_usuario', $id_usuario)->get();
         $caracteristicas = [];
         foreach ($datos as $value) {
