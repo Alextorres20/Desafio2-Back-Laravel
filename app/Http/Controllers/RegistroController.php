@@ -23,7 +23,7 @@ use Illuminate\Support\Str;
 class RegistroController extends Controller
 {
     // Alejandro y Alicia
-    public function iniciarSesion(Request $request)
+    public static function iniciarSesion(Request $request)
     {
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $auth = Auth::user();
@@ -53,7 +53,7 @@ class RegistroController extends Controller
     }
 
     // Alejandro
-    public function registrar(Request $request)
+    public static function registrar(Request $request)
     {
         $messages = [
             'email' => 'El campo no se ajusta a n correo estándar',
@@ -95,7 +95,7 @@ class RegistroController extends Controller
     }
 
     // Alejandro
-    public function verificar($id, Request $re){
+    public static function verificar($id, Request $re){
         $usuarioVerificado = User::where('id', $id)
         ->update(['email_verified_at' => Carbon::now()->toDateTimeString(),
         'remember_token' => Str::random(10)]);
@@ -122,7 +122,7 @@ class RegistroController extends Controller
     }
 
     // Alejandro
-    public function cerrarSesion(Request $request)
+    public static function cerrarSesion(Request $request)
     {
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             $cantidad = Auth::user()->tokens()->delete();
