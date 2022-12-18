@@ -12,7 +12,7 @@ use App\Models\User;
 class CaracteristicasController extends Controller
 {
     // Alejandro
-    public function asignarCaracteristicas($id, $id_caracteristica){
+    public static function asignarCaracteristicas($id, $id_caracteristica){
         try {
             $carac_user = new CaracteristicaUsuario;
             $carac_user->id_usuario = $id;
@@ -26,7 +26,7 @@ class CaracteristicasController extends Controller
         return $mensaje;
     }
 
-    public function mostrarCaracteristicas_Dios ($id_usuario){
+    public static function mostrarCaracteristicas_Dios ($id_usuario){
         $humano_caracteristicas = CaracteristicaUsuario::where('id_usuario', $id_usuario)->get();
         $humano_dios = DiosHumano::where('id_humano', $id_usuario)->first();
         $dios = User::where('id', $humano_dios->id_dios)->first();
